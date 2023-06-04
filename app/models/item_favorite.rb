@@ -1,0 +1,2 @@
+class ItemFavorite < ApplicationRecord
+end
