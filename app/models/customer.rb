@@ -5,9 +5,8 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
   enum member_status: { exist: false, withdraw: true }
   
-  #表示名の使用文字の条件
-  VALID_DISPLAYNAME_REGEX= /\A[a-z0-9]+\z/i.
-  validates :display_name, length: { in: 1..15}, presence: true, uniqueness: true, format: { with: VALID_DISPLAYNAME_REGEX, message: "は半角1~15文字英大文字・小文字・数字のみ使用可能です"}
+  #表示名の使用文字の条件 1~15文字以上
+  validates :display_name, length: { in: 1..15}, presence: true, uniqueness: true, format: { with: /\A[a-z0-9]+\z/ }
   validates :introduciton, length:{maximum: 50}
   validates :email, presence: true
   validates :encrypted_password, presence: true, length: { minimum: 6 }
