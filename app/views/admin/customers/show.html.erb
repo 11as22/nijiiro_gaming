@@ -1,2 +1,36 @@
-<h1>Admin::Customers#show</h1>
-<p>Find me in app/views/admin/customers/show.html.erb</p>
+<div class = "container">
+  <%= flash[:notice] %>
+  <div class ="row justify-content-md-center">
+    <div class ="col-md-auto">
+      <h1><%= @customer.display_name %>さんのページ</h1>
+      <%= image_tag @customer.get_profile_image(270,270) %>
+    </div>
+  </div>
+  <div class ="row">
+    <table class = "table">
+      <th>
+        <tr>
+        <!--管理者側のみ表示-->
+          <td>会員ID</td>
+          <td><%= @customer.id %></td>
+        </tr>
+        <tr>
+          <td>表示名</td>
+          <td><%= @customer.display_name %></td>
+        </tr>
+        <tr>
+          <td>メールアドレス</td>
+          <td><%= @customer.email %></td>
+        </tr>
+        <tr>
+          <td>自己紹介</td>
+          <td><%= @customer.introduction %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><%= link_to "編集する",edit_admin_customer_path(@customer), class: "btn btn-success" %></td>
+        </tr>
+      </th>
+    </table>
+  </div>
+</div>
