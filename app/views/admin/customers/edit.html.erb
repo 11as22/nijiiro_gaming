@@ -1,2 +1,67 @@
-<h1>Admin::Customers#edit</h1>
-<p>Find me in app/views/admin/customers/edit.html.erb</p>
+<div class = "container">
+  <%= flash[:alert] %>
+  <div class ="row justify-content-md-center">
+    <div class ="col-md-auto">
+      <h1><%= @customer.display_name %>さんの会員情報編集ページ</h1>
+      <%= image_tag @customer.get_profile_image(270,270) %>
+    </div>
+  </div>
+  <%= form_with model: @customer, url:admin_customer_path, metod: :patch, local: true do |f| %>
+    <table class = "table">
+      <th>
+        <tr>
+          <!--管理者側のみ表示-->
+          <td>会員ID</td>
+          <td><%= @customer.id %></td>
+        </tr>
+        <tr>
+          <td>プロフィール画像</td>
+          <td>
+            <% f.label :profile_image %>
+            <%= f.file_field :profile_image, accept: "image/*" %>
+          </td>
+        </tr>
+        <tr>
+          <td>表示名(変更できません)</td>
+          <td>
+            <%= @customer.display_name %>
+          </td>
+        </tr>
+        <tr>
+          <td>メールアドレス</td>
+          <td>
+            <div class="field">
+              <% f.label :email %>
+              <%= f.email_field :email, placeholder: @customer.email %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>自己紹介</td>
+          <td>
+            <div class="field">
+              <% f.label :introduction %>
+              <%= f.text_area :introduction, placeholder: @customer.introduction %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <div class="form-group">
+            <td>会員ステータス</td>
+            <!--会員の退会、有効を選択するラジオボタン-->
+            <td>
+            　<%= f.radio_button :member_status, Customer.member_statuses.key(false) %>
+              <%= f.label :member_status_exist, Customer.member_statuses_i18n[:exist] %>
+              <%= f.radio_button :member_status, Customer.member_statuses.key(true) %>
+              <%= f.label :member_status_withdraw, Customer.member_statuses_i18n[:withdraw] %>
+            </td>
+          </div>
+        </tr>
+        <tr>
+          <td></td>
+          <td><%= f.submit '変更を保存', class: "btn btn-sm btn-success" %></td>
+        </tr>
+      </th>
+    </table>
+  <% end %>
+</div>

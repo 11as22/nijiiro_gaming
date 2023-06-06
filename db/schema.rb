@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2023_06_04_094557) do
     t.string "email", null: false
     t.string "encrypted_password", null: false
     t.string "display_name", null: false
+    t.text "introduction"
     t.boolean "member_status", default: false, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -67,16 +68,24 @@ ActiveRecord::Schema.define(version: 2023_06_04_094557) do
   end
 
   create_table "item_favorites", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "item_post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "item_genres", force: :cascade do |t|
+    t.string "genre", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "item_posts", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "item_genre_id", null: false
+    t.string "item_name", null: false
+    t.text "item_explanation", null: false
+    t.string "model_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -87,11 +96,20 @@ ActiveRecord::Schema.define(version: 2023_06_04_094557) do
   end
 
   create_table "review_comments", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "review_id", null: false
+    t.text "comment", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "reviews", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "item_posts", null: false
+    t.string "title", null: false
+    t.text "impression", null: false
+    t.string "item_price"
+    t.float "rate", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

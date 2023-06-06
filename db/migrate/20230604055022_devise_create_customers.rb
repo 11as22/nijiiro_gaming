@@ -8,6 +8,7 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
       t.string :encrypted_password, null: false
       #表示名カラム
       t.string :display_name,       null: false
+      t.text :introduction
       t.boolean :member_status,     null: false, default: false
 
       ## Recoverable
