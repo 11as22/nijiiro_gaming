@@ -105,11 +105,11 @@ ActiveRecord::Schema.define(version: 2023_06_04_094557) do
 
   create_table "reviews", force: :cascade do |t|
     t.integer "customer_id", null: false
-    t.integer "item_posts", null: false
+    t.integer "item_post_id", null: false
     t.string "title", null: false
     t.text "impression", null: false
     t.string "item_price"
-    t.float "rate", null: false
+    t.float "star", default: 3.0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

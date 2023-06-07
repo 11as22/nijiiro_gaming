@@ -30,9 +30,11 @@
       </li>
       <!--顧客がログインしていたら-->
       <% elsif customer_signed_in? %>
-        <p class="text-light">
-          ようこそ <strong><%= current_customer.display_name %></strong> さん!
-        </p>
+        <%= link_to customer_path(current_customer) do %>
+          <p class="text-light">
+            ようこそ <strong><%= current_customer.display_name %></strong> さん!
+          </p>
+        <% end %>  
         <li>
           <%= link_to about_path, class: "nav-link text-light" do %>
             About

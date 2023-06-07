@@ -1,2 +1,78 @@
-<h1>Public::Reviews#new</h1>
-<p>Find me in app/views/public/reviews/new.html.erb</p>
+<div class = "container">
+  <h1>レビュー投稿画面</h1>
+  <%= flash[:notice] %>
+  <div class = "row">
+    <div class = "col-md-4 mt-4">
+        <%= image_tag  @item_post.get_item_image(250, 200), class: "show-item-image" %>
+    </div>
+    <div class ="col-md-8">
+      <table>
+        <th>
+          <tr>
+            <td>商品名</td>
+            <td><%= @item_post.item_name %></td>
+          </tr>
+          <tr>
+            <td>商品モデル番号</td>
+            <td><%= @item_post.model_number %></td>
+          </tr>
+          <tr>
+            <td>商品説明文</td>
+            <td><%= @item_post.item_explanation %></td>
+          </tr>
+        </th>
+      </table>
+    </div>
+  </div>
+  <div class = "row">
+    <div class ="col-md-2"><h4>ジャンル:</h4></div>
+    <div class ="col-md-2"><%= @item_post.item_genre.genre %></div>
+    <div class ="col-md-2"><h4>投稿者:</h4></div>
+    <div class ="col-md-2"><%= @item_post.customer.display_name %></div>
+  </div>
+</div>
+
+<div class = "container">
+  <div class ="row">
+    <%= form_with model: [@item_post, @review], local: true do |f| %>
+      <table>
+        <th>
+          <tr>
+            <td>評価値</td>
+            <td>
+              <script>
+                $('#star').raty({
+                  size     : 36,
+                  starOff:  '<%= '/assets/images/star-off.png' %>',
+                  starOn : '<%= '/assets/images/star-on.png' %>',
+                  starHalf: '<%= '/assets/images/star-harf.png' %>',
+                  scoreName: 'review[star]',
+                });
+              </script>
+            </td>
+          </tr>
+          <tr>
+            <td>レビュータイトル</td>
+            <td>
+              <% f.label :title %>
+              <%= f.text_field :title %>
+            </td>
+          </tr>
+          <tr>
+            <td>レビュー内容</td>
+            <td>
+              <% f.label :impression %>
+              <%= f.text_area :impression %>
+            </td>
+          </tr>
+        </th>
+      </table>
+      <div class="form-group">
+        <td></td>
+        <td>
+          <%= f.submit 'レビューを投稿する', class: "btn btn-sm btn-success" %>
+        </td>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -15,6 +15,13 @@ import "../stylesheets/application";
 
 import '@fortawesome/fontawesome-free/js/all'
 
+
+// raty使用
+window.$ = window.jQuery = require('jquery');
+require('packs/raty')
+
+require("jquery")
+
 Rails.start()
-Turbolinks.start()
+// Turbolinks.start()
 ActiveStorage.start()

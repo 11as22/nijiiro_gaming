@@ -22,16 +22,16 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   end
 
   scope module: :public do
-    resources :item_posts, only:[:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :item_posts, only:[:new, :create, :index, :show, :edit, :update, :destroy] do
+      resources :reviews, only:[:new, :create, :index, :show, :edit, :update, :destroy]
+    end
 
-    get 'customers/mypage' => 'customers#show'
-    resources :customers, only:[:edit, :update]
-
-    resources :reviews, only:[:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :customers, only:[:show, :edit, :update]
     resources :review_comments, only:[:new, :create, :index, :destroy]
 
     root to: 'homes#top'
     get '/about' =>'homes#about'
+    get '/genre/:id' =>'homes#index', as: 'index'
   end
 
 
