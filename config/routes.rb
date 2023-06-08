@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+get "search" => "searches#search"
 devise_for :customers, skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
@@ -19,6 +20,8 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :reviews, only:[:index, :show, :edit, :update, :destroy]
     resources :review_comments, only:[:index, :destroy]
     root to: 'homes#top'
+    get '/about' =>'homes#about'
+    get "search" => "searches#search"
   end
 
   scope module: :public do
@@ -26,12 +29,14 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
       resources :reviews, only:[:new, :create, :index, :show, :edit, :update, :destroy]
     end
 
-    resources :customers, only:[:show, :edit, :update]
-    resources :review_comments, only:[:new, :create, :index, :destroy]
+    get '/customer/:customer_id/reviews' => 'customers#reviews'
 
+    resources :customers, only:[:index,:show, :edit, :update]
+    resources :review_comments, only:[:new, :create, :index, :destroy]
     root to: 'homes#top'
     get '/about' =>'homes#about'
     get '/genre/:id' =>'homes#index', as: 'index'
+    get "search" => "searches#search"
   end
 
 

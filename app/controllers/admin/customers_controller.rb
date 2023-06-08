@@ -17,8 +17,8 @@ class Admin::CustomersController < Admin::ApplicationController
       redirect_to admin_customer_path
       flash[:notice] = "会員情報の更新に成功しました"
     else
-      render :edit
       flash[:alert] = "会員情報の更新に失敗しました。"
+      render :edit
     end
   end
   

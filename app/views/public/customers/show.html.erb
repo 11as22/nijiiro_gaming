@@ -1,2 +1,49 @@
-<h1>Public::Customers#show</h1>
-<p>Find me in app/views/public/customers/show.html.erb</p>
+<div class = "container">
+  <%= flash[:notice] %>
+  <div class ="row justify-content-md-center">
+    <div class ="col-md-auto">
+      <h1><%= @customer.display_name %>さんのページ</h1>
+      <%= image_tag @customer.get_profile_image(250,200), class: "large-image" %>
+    </div>
+  </div>
+  <div class ="row">
+    <table class = "table">
+      <th>
+        <tr>
+          <td>表示名</td>
+          <td><%= @customer.display_name %></td>
+        </tr>
+        <tr>
+          <% if @customer == current_customer %>
+            <td>メールアドレス</td>
+            <td><%= @customer.email %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>自己紹介</td>
+          <td><%= @customer.introduction %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <% if @customer == current_customer %>
+            <td>
+              <%= link_to "編集する",edit_customer_path(@customer), class: "btn btn-success" %>
+            </td>
+          <% end %>
+        </tr>
+      </th>
+    </table>
+    <div class ="row">
+      <table class ="table">
+        <th>
+          <tr>
+            <!--商品投稿パスにcustomer_id に@customerの.idを渡す。-->
+            <td><%= link_to item_posts_path(customer_id: @customer.id) do %><%= @customer.display_name %>さんの商品投稿一覧<% end %></td>
+            <!--ヘルパーがないので、URLに@customer.idをわたし、@customerのレビューを表示-->
+            <td><%= link_to "/customer/#{@customer.id}/reviews" do %><%= @customer.display_name %>さんのレビュー投稿一覧<% end %></td>
+          </tr>
+        </th>
+      </table>
+    </div>
+  </div>
+</div>

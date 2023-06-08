@@ -5,7 +5,6 @@ class Public::ReviewsController < ApplicationController
   end
 
   def create
-   
     @item_post = ItemPost.find(params[:item_post_id])
     @review = Review.new(review_params)
     @review.item_post_id  = @item_post.id
@@ -28,12 +27,28 @@ class Public::ReviewsController < ApplicationController
 
   def show
     @item_post = ItemPost.find(params[:item_post_id])
-    @reviews = Review.find(params[:id])
+    @review = Review.find(params[:id])
   end
 
   def edit
+    @item_post = ItemPost.find(params[:item_post_id])
+    @review = Review.find(params[:id])
   end
-
+  
+  def update
+    @item_post = ItemPost.find(params[:item_post_id])
+    @review = Review.find(params[:id])
+    if @review.update(review_params)
+      redirect_to item_post_review_path(@item_post.id, @review.id)
+      flash[:notice] = "レビューの更新に成功しました"
+    else
+      flash[:alert] = "レビューの更新に失敗しました。"
+      @item_post = ItemPost.find(params[:item_post_id])
+      @review = Review.find(params[:id])
+      render :edit
+    end
+  end
+  
   private
 
   def review_params
