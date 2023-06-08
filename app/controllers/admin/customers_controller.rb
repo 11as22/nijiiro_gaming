@@ -1,4 +1,7 @@
 class Admin::CustomersController < Admin::ApplicationController
+  def index
+    @cusomers = Customers.all
+  end
 
   def show
     @customer = Customer.find(params[:id])
