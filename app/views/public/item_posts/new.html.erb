@@ -1,2 +1,57 @@
-<h1>Public::ItemPosts#new</h1>
-<p>Find me in app/views/public/item_posts/new.html.erb</p>
+<div class = "container">
+  <h1>新規商品投稿画面</h1>
+   <!--エラーメッセージ-->
+  <%= flash[:alert] %>
+  <%= form_with model: @item_post, url: item_posts_path, method: :post, local: true do |f| %>
+    <table>
+      <th>
+        <tr>
+          <td>商品画像</td>
+          <td>
+            <% f.label :item_image %>
+            <%= f.file_field :item_image, accept: "image/*" %>
+          </td>
+        </tr>
+        <tr>
+          <td>商品名</td>
+          <td>
+            <% f.label :item_name %>
+            <%= f.text_field :item_name %>
+          </td>
+        </tr>
+        <tr>
+          <td>商品モデル番号</td>
+          <td>
+            <% f.label :model_number %>
+            <%= f.text_field :model_number %>
+          </td>
+        </tr>
+        <tr>
+          <td>商品説明文</td>
+          <td>
+            <% f.label :item_explanation %>
+            <%= f.text_area :item_explanation %>
+          </td>
+        </tr>
+        <tr>
+          <div class="form-group">
+            <td>ジャンル</td>
+            <td>
+              <!--アイテムのジャンルを既存のジャンルから選択するためのボックス-->
+            <%= f.select :item_genre_id, options_from_collection_for_select(ItemGenre.all, :id, :genre),{ :include_blank => '--選択してください--' }, :required => true  %>
+            </td>
+          </div>
+        </tr>
+        <tr>
+          <!--登録ボタン-->
+          <div class="form-group">
+            <td></td>
+            <td>
+              <%= f.submit '新規登録', class: "btn btn-sm btn-success" %>
+            </td>
+          </div>
+        </tr>
+      </th>
+    </table>
+  <% end %>
+</div>
