@@ -2,7 +2,7 @@
   <%= flash[:notice] %>
   <div class = "row">
     <div class = "col-md-4 mt-4">
-        <%= image_tag  @item_post.get_item_image(250, 200), class: "show-item-image" %>
+        <%= image_tag  @item_post.get_item_image(250, 200), class: "large-image" %>
     </div>
     <div class ="col-md-8">
       <table>
@@ -45,7 +45,7 @@
     <div class = "row">
       <div class ="col-md-4">
         <%= link_to customer_path(review.customer_id) do %>
-          <%= image_tag  review.customer.get_profile_image(150, 100), class: "item_post-show-review-image" %><br/>
+          <%= image_tag  review.customer.get_profile_image(150, 100), class: "small-image" %><br/>
           投稿者名:<%= review.customer.display_name %>
         <% end %>
       </div>
@@ -56,6 +56,10 @@
             <tr>
               <td>タイトル</td>
               <td><%= review.title %></td>
+            </tr>
+            <tr>
+              <td>購入時価格</td>
+              <td><%= review.item_price %></td>
             </tr>
             <tr>
               <td>本文</td>

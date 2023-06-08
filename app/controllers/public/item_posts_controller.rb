@@ -3,7 +3,7 @@ class Public::ItemPostsController < ApplicationController
   def new
     @item_post = ItemPost.new
   end
-  
+
   def create
     @item_post = ItemPost.new(item_post_params)
     @item_post.customer_id = current_customer.id
@@ -20,7 +20,12 @@ class Public::ItemPostsController < ApplicationController
   end
 
   def index
-    @item_posts = ItemPost.all
+    #もしulrにcustomer_idを含んでいたら、その人のitem_postsを取得するコントローラー
+    if params[:customer_id].present?
+      @item_posts = ItemPost.where(customer_id: params[:customer_id])
+    else
+      @item_posts = ItemPost.all
+    end
     @genres = ItemGenre.all
   end
 
@@ -32,7 +37,7 @@ class Public::ItemPostsController < ApplicationController
   def edit
     @item_post = ItemPost.find(params[:id])
   end
-  
+
   def update
      @item_post = ItemPost.find(params[:id])
     if @item_post.update(item_post_params)
@@ -43,12 +48,12 @@ class Public::ItemPostsController < ApplicationController
       flash[:alert] = "商品情報の更新に失敗しました。"
     end
   end
-  
+
   def destroy
   end
-  
+
   private
-  
+
   def item_post_params
     params.require(:item_post).permit(:item_genre_id, :item_name, :item_explanation, :model_number, :item_image, :customer_id)
   end

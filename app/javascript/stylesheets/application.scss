@@ -1,4 +1,16 @@
 @use '~bootstrap/scss/bootstrap';
 @use '~@fortawesome/fontawesome-free/scss/fontawesome';
 
-@use "item_post";
+.large-image{
+  width: 250px;
+  height: 200px;
+}
+
+.middle-image{
+  width: 200px;
+  height: 100px;
+}
+.small-image{
+  width: 150px;
+  height: 100px;
+}

@@ -3,7 +3,7 @@
   <%= flash[:notice] %>
   <div class = "row">
     <div class = "col-md-4 mt-4">
-        <%= image_tag  @item_post.get_item_image(250, 200), class: "show-item-image" %>
+        <%= image_tag  @item_post.get_item_image(250, 200), class: "large-image" %>
     </div>
     <div class ="col-md-8">
       <table>
@@ -39,9 +39,9 @@
         <th>
           <tr>
             <td>評価値</td>
-            
-
-            
+            <script>
+            </script>
+      
           </tr>
           <tr>
             <td>レビュータイトル</td>
@@ -55,6 +55,13 @@
             <td>
               <% f.label :impression %>
               <%= f.text_area :impression %>
+            </td>
+          </tr>
+          <tr>
+            <td>購入時価格</td>
+            <td>
+              <% f.label :item_price %>
+              <%= f.text_field :item_price %>
             </td>
           </tr>
         </th>

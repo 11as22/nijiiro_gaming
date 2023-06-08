@@ -1,2 +1,68 @@
-<h1>Public::Reviews#show</h1>
-<p>Find me in app/views/public/reviews/show.html.erb</p>
+<div class = "container">
+  <h1>レビュー詳細画面</h1>
+  <%= flash[:notice] %>
+  <div class = "row">
+    <div class = "col-md-4 mt-4">
+        <%= image_tag  @item_post.get_item_image(200, 150), class: "middle-image" %>
+    </div>
+    <div class ="col-md-8">
+      <table>
+        <th>
+          <tr>
+            <td>商品名</td>
+            <td><%= @item_post.item_name %></td>
+          </tr>
+          <tr>
+            <td>商品モデル番号</td>
+            <td><%= @item_post.model_number %></td>
+          </tr>
+          <tr>
+            <td>商品説明文</td>
+            <td><%= @item_post.item_explanation %></td>
+          </tr>
+        </th>
+      </table>
+    </div>
+  </div>
+  <div class = "row">
+    <div class ="col-md-4">
+    </div>
+    <div class ="col-md-2"><h4>ジャンル:</h4></div>
+    <div class ="col-md-2"><%= @item_post.item_genre.genre %></div>
+    <div class ="col-md-2"><h4>投稿者:</h4></div>
+    <div class ="col-md-2"><%= @item_post.customer.display_name %></div>
+  </div>
+  <div class = "row">
+    <div class ="col-md-4">
+      <%= link_to customer_path(@review.customer) do %>
+        <%= image_tag  @review.customer.get_profile_image(250, 200), class: "large-image" %><br/>
+        投稿者名:<%= @review.customer.display_name %>
+      <% end %>
+    </div>
+    <div class "col-md-8">
+      <table>
+        <th>
+          <tr>
+            <td>タイトル</td>
+            <td><%= @review.title %></td>
+          </tr>
+          <tr>
+            <td>購入時価格</td>
+            <td><%= @review.item_price %></td>
+          </tr>
+          <tr>
+            <td>本文</td>
+            <td><%= @review.impression %></td>
+          </tr>
+          <tr>
+            <td>
+              <% if current_customer == @review.customer %>
+                <%= link_to "編集する", edit_item_post_review_path(@item_post.id, @review.id), class: "btn btn-success" %>
+              <% end %>
+            </td>
+          </tr>
+        </th>
+      </table>
+    </div>
+  </div>
+</div>
