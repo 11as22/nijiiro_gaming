@@ -1,38 +1,41 @@
 <div class = "container">
   <h1>レビュー詳細画面</h1>
   <%= flash[:notice] %>
-  <div class = "row">
-    <div class = "col-md-4 mt-4">
-        <%= image_tag  @item_post.get_item_image(200, 150), class: "middle-image" %>
+  <div class =" mt-4 border border-success">
+    <div class = "row">
+      <div class = "col-md-4 mt-4">
+          <%= image_tag  @item_post.get_item_image(200, 150), class: "middle-image" %>
+      </div>
+      <div class ="col-md-8">
+        <table>
+          <th>
+            <tr>
+              <td class = "col-md-3"><h5>商品名</h5></td>
+              <td class = "col-md-5"><%= @item_post.item_name %></td>
+            </tr>
+            <tr>
+              <td class = "col-md-3"><h5>商品モデル番号</h5></td>
+              <td class = "col-md-5"><%= @item_post.model_number %></td>
+            </tr>
+            <tr>
+              <td class = "col-md-3"><h5>商品説明文</h5></td>
+              <!--表示する商品説明を20文字-->
+              <td class = "col-md-5"><%= @item_post.item_explanation.truncate(20) %></td>
+            </tr>
+          </th>
+        </table>
+      </div>
     </div>
-    <div class ="col-md-8">
-      <table>
-        <th>
-          <tr>
-            <td>商品名</td>
-            <td><%= @item_post.item_name %></td>
-          </tr>
-          <tr>
-            <td>商品モデル番号</td>
-            <td><%= @item_post.model_number %></td>
-          </tr>
-          <tr>
-            <td>商品説明文</td>
-            <td><%= @item_post.item_explanation %></td>
-          </tr>
-        </th>
-      </table>
+    <div class = "row">
+      <div class ="col-md-4">
+      </div>
+      <div class ="col-md-2"><h4>ジャンル:</h4></div>
+      <div class ="col-md-2"><%= @item_post.item_genre.genre %></div>
+      <div class ="col-md-2"><h4>投稿者:</h4></div>
+      <div class ="col-md-2"><%= @item_post.customer.display_name %></div>
     </div>
   </div>
-  <div class = "row">
-    <div class ="col-md-4">
-    </div>
-    <div class ="col-md-2"><h4>ジャンル:</h4></div>
-    <div class ="col-md-2"><%= @item_post.item_genre.genre %></div>
-    <div class ="col-md-2"><h4>投稿者:</h4></div>
-    <div class ="col-md-2"><%= @item_post.customer.display_name %></div>
-  </div>
-  <div class = "row">
+  <div class = "row mt-4 border border-dark">
     <div class ="col-md-4">
       <%= link_to customer_path(@review.customer) do %>
         <%= image_tag  @review.customer.get_profile_image(250, 200), class: "large-image" %><br/>
@@ -43,15 +46,22 @@
       <table>
         <th>
           <tr>
+            <td>評価</td>
+            <td></td>
+          </tr>
+          <tr>
             <td>タイトル</td>
+            <td colspan = "3"></td>
             <td><%= @review.title %></td>
           </tr>
           <tr>
             <td>購入時価格</td>
+            <td colspan = "3"></td>
             <td><%= @review.item_price %></td>
           </tr>
           <tr>
             <td>本文</td>
+            <td colspan = "3"></td>
             <td><%= @review.impression %></td>
           </tr>
           <tr>

@@ -10,21 +10,21 @@
         <p>商品投稿一覧(全<%= @item_posts.count %>件)</p>
       </div>
       <% @item_posts.each do |item| %>
-        <%= link_to item_post_path(item.id) do %>
-          <div class = "row">
+        <%= link_to item_post_path(item.id), class: "text-decoration-none text-dark" do %>
+          <div class = "row border border-success mb-3">
             <div class ="col-md-4">
               <%= image_tag  item.get_item_image(150, 100), class: "small-image" %>
             </div>
-            <div class "col-md-8">
+            <div class = "col-md-8 ">
               <table>
                 <th>
                   <tr>
-                    <td>商品名</td>
-                    <td><%= item.item_name %></td>
+                    <td class ="col-md-4"><h5>商品名</h5></td>
+                    <td class = col-md-4><%= item.item_name %></td>
                   </tr>
                   <tr>
-                    <td>ジャンル</td>
-                    <td><%= item.item_genre.genre %></td>
+                    <td class ="col-md-4"><h5>ジャンル</h5></td>
+                    <td class ="col-md-4"><%= item.item_genre.genre %></td>
                   </tr>
                 </th>
               </table>

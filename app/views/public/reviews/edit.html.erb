@@ -1,36 +1,38 @@
 <div class = "container">
   <h1>レビュー編集画面</h1>
   <%= flash[:alert] %>
-  <div class = "row">
-    <div class = "col-md-4 mt-4">
-        <%= image_tag  @item_post.get_item_image(200, 150), class: "middle-image" %>
+  <div class =" mt-4 border border-success">
+    <div class = "row">
+      <div class = "col-md-4 mt-4">
+          <%= image_tag  @item_post.get_item_image(250, 200), class: "large-image" %>
+      </div>
+      <div class ="col-md-8">
+        <table>
+          <th>
+            <tr>
+              <td>商品名</td>
+              <td><%= @item_post.item_name %></td>
+            </tr>
+            <tr>
+              <td>商品モデル番号</td>
+              <td><%= @item_post.model_number %></td>
+            </tr>
+            <tr>
+              <td>商品説明文</td>
+              <td><%= @item_post.item_explanation %></td>
+            </tr>
+          </th>
+        </table>
+      </div>
     </div>
-    <div class ="col-md-8">
-      <table>
-        <th>
-          <tr>
-            <td>商品名</td>
-            <td><%= @item_post.item_name %></td>
-          </tr>
-          <tr>
-            <td>商品モデル番号</td>
-            <td><%= @item_post.model_number %></td>
-          </tr>
-          <tr>
-            <td>商品説明文</td>
-            <td><%= @item_post.item_explanation %></td>
-          </tr>
-        </th>
-      </table>
+    <div class = "row">
+      <div class ="col-md-2"><h4>ジャンル:</h4></div>
+      <div class ="col-md-2"><%= @item_post.item_genre.genre %></div>
+      <div class ="col-md-2"><h4>投稿者:</h4></div>
+      <div class ="col-md-2"><%= @item_post.customer.display_name %></div>
     </div>
   </div>
-  <div class = "row">
-    <div class ="col-md-2"><h4>ジャンル:</h4></div>
-    <div class ="col-md-2"><%= @item_post.item_genre.genre %></div>
-    <div class ="col-md-2"><h4>投稿者:</h4></div>
-    <div class ="col-md-2"><%= @item_post.customer.display_name %></div>
-  </div>
-</div>
+</div>  
 
 <div class = "container">
   <div class ="row">
@@ -39,9 +41,7 @@
         <th>
           <tr>
             <td>評価値</td>
-            <script>
-            </script>
-      
+            <td></td>
           </tr>
           <tr>
             <td>レビュータイトル</td>
@@ -73,5 +73,8 @@
         </td>
       </div>
     <% end %>
+  </div>
+  <div class ="row justify-content-between">
+    <%= link_to "レビューを削除する", item_post_review_path(@item_post, @review), data: {confirm: "レビューを削除します。よろしいですか？"}, method: :delete, class: "btn btn-danger" %>
   </div>
 </div>

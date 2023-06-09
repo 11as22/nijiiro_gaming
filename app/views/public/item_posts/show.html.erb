@@ -1,75 +1,85 @@
 <div class = "container">
   <%= flash[:notice] %>
-  <div class = "row">
-    <div class = "col-md-4 mt-4">
-        <%= image_tag  @item_post.get_item_image(250, 200), class: "large-image" %>
+  <div class =" mt-4 border border-success">
+    <div class = "row">
+      <div class = "col-md-4 mt-4">
+          <%= image_tag  @item_post.get_item_image(250, 200), class: "large-image" %>
+      </div>
+      <div class ="col-md-8">
+        <table>
+          <th>
+            <tr>
+              <td class = "col-md-3"><h5>商品名</h5></td>
+              <td class = "col-md-5"><%= @item_post.item_name %></td>
+            </tr>
+            <tr>
+              <td class = "col-md-3"><h5>商品モデル番号</h5></td>
+              <td class = "col-md-5"><%= @item_post.model_number %></td>
+            </tr>
+            <tr>
+              <td class = "col-md-3"><h5>商品説明文</h5></td>
+              <td class = "col-md-5"><%= @item_post.item_explanation %></td>
+            </tr>
+          </th>
+        </table>
+      </div>
     </div>
-    <div class ="col-md-8">
-      <table>
-        <th>
-          <tr>
-            <td>商品名</td>
-            <td><%= @item_post.item_name %></td>
-          </tr>
-          <tr>
-            <td>商品モデル番号</td>
-            <td><%= @item_post.model_number %></td>
-          </tr>
-          <tr>
-            <td>商品説明文</td>
-            <td><%= @item_post.item_explanation %></td>
-          </tr>
-        </th>
-      </table>
+    <div class = "row">
+      <div class ="col-md-4 text-center mt-2">
+        <!--現在のユーザーが商品投稿者であれば、編集ボタンを表示-->
+        <% if current_customer == @item_post.customer %>
+          <%= link_to "編集する",edit_item_post_path(@item_post), class: "btn-block btn-success" %>
+        <% end %>
+      </div>
+      <div class ="col-md-2"><h5>ジャンル:</h5></div>
+      <div class ="col-md-2"><%= @item_post.item_genre.genre %></div>
+      <div class ="col-md-2"><h5>投稿者:</h5></div>
+      <div class ="col-md-2"><%= @item_post.customer.display_name %></div>
     </div>
-  </div>
-  <div class = "row">
-    <div class ="col-md-4">
-      <!--現在のユーザーが商品投稿者であれば、編集ボタンを表示-->
-      <% if current_customer == @item_post.customer %>
-        <%= link_to "編集する",edit_item_post_path(@item_post), class: "btn btn-success" %>
-      <% end %>
-    </div>
-    <div class ="col-md-2"><h4>ジャンル:</h4></div>
-    <div class ="col-md-2"><%= @item_post.item_genre.genre %></div>
-    <div class ="col-md-2"><h4>投稿者:</h4></div>
-    <div class ="col-md-2"><%= @item_post.customer.display_name %></div>
   </div>
   <div class ="row justify-content-center">
-    <div class ="col-3">
-      <%= link_to "この商品のレビューを書く", new_item_post_review_path(@item_post) %>
+    <div class ="col-3 text-center mt-2">
+      <%= link_to "この商品のレビューを書く", new_item_post_review_path(@item_post), class: "btn-block btn-primary"%>
     </div>
   </div>
 
   <% @reviews.each do |review| %>
-    <div class = "row">
-      <div class ="col-md-4">
+    <div class = "row border border-dark mt-2 mb-1">
+      <div class ="col-md-3">
         <%= link_to customer_path(review.customer_id) do %>
           <%= image_tag  review.customer.get_profile_image(150, 100), class: "small-image" %><br/>
           投稿者名:<%= review.customer.display_name %>
         <% end %>
       </div>
-      <div class "col-md-8">
-        <%= link_to item_post_review_path(@item_post.id, review.id) do %>
-        <table>
-          <th>
-            <tr>
-              <td>タイトル</td>
-              <td><%= review.title %></td>
-            </tr>
-            <tr>
-              <td>購入時価格</td>
-              <td><%= review.item_price %></td>
-            </tr>
-            <tr>
-              <td>本文</td>
-              <!--表示する本文を10文字に設定-->
-              <td><%= review.impression.truncate(10) %></td>
-            </tr>
-          </th>
-        </table>
+      <%= link_to item_post_review_path(@item_post.id, review.id) do %>
+        <div class "col-md-9">
+          <table>
+            <th>
+              <tr>
+                <td>評価値</td>
+                <td colspan = "3">
+                <td></td>
+              </tr>
+              <tr>
+                <td>タイトル</td>
+                <td colspan = "3"></td>
+                <td><%= review.title %></td>
+              </tr>
+              <tr>
+                <td>購入時価格</td>
+                <td colspan = "3"></td>
+                <td><%= review.item_price %></td>
+              </tr>
+              <tr>
+                <td>本文</td>
+                <td colspan = "3"></td>
+                <!--表示する本文を10文字に設定-->
+                <td><%= review.impression.truncate(10) %></td>
+              </tr>
+            </th>
+          </table>
+        </div>
       <% end %>
-      </div>
     </div>
   <% end %>
 </div>
