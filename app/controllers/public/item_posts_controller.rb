@@ -20,7 +20,7 @@ class Public::ItemPostsController < ApplicationController
   end
 
   def index
-    #もしurlにcustomer_idを含んでいたら、その人のitem_postsを取得するコントローラー
+    #もしulrにcustomer_idを含んでいたら、その人のitem_postsを取得するコントローラー
     if params[:customer_id].present?
       @item_posts = ItemPost.where(customer_id: params[:customer_id])
     else

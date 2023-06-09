@@ -1,7 +1,7 @@
 class ItemPost < ApplicationRecord
   validates :item_name, presence: true, length: { in: 1..50}
   validates :item_explanation, presence: true, length: { in: 1..200 }
-  validates :model_number, length: {maximum:30}
+  validates :model_number, length: {maximum: 30}
   
   has_many :item_favorites, dependent: :destroy
   has_many :reviews, dependent: :destroy
@@ -10,7 +10,7 @@ class ItemPost < ApplicationRecord
   
   has_one_attached :item_image
   
-def  self.looks(search, word)
+  def  self.looks(search, word)
     if search == "perfect_match"
       @user = User.where("name LIKE?", "#{word}")
     elsif search == "forward_match"
