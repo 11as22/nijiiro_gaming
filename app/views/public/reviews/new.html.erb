@@ -1,47 +1,47 @@
 <div class = "container">
   <h1>レビュー投稿画面</h1>
   <%= flash[:notice] %>
-  <div class = "row">
-    <div class = "col-md-4 mt-4">
-        <%= image_tag  @item_post.get_item_image(250, 200), class: "large-image" %>
+  <div class =" mt-4 border border-success">
+    <div class = "row">
+      <div class = "col-md-4 mt-4">
+          <%= image_tag  @item_post.get_item_image(250, 200), class: "large-image" %>
+      </div>
+      <div class ="col-md-8">
+        <table>
+          <th>
+            <tr>
+              <td class = "col-md-3"><h5>商品名</h5></td>
+              <td class = "col-md-5"><%= @item_post.item_name %></td>
+            </tr>
+            <tr>
+              <td class = "col-md-3"><h5>商品モデル番号</h5></td>
+              <td class = "col-md-5"><%= @item_post.model_number %></td>
+            </tr>
+            <tr>
+              <td class = "col-md-3"><h5>商品説明文</h5></td>
+              <td class = "col-md-5"><%= @item_post.item_explanation %></td>
+            </tr>
+          </th>
+        </table>
+      </div>
     </div>
-    <div class ="col-md-8">
-      <table>
-        <th>
-          <tr>
-            <td>商品名</td>
-            <td><%= @item_post.item_name %></td>
-          </tr>
-          <tr>
-            <td>商品モデル番号</td>
-            <td><%= @item_post.model_number %></td>
-          </tr>
-          <tr>
-            <td>商品説明文</td>
-            <td><%= @item_post.item_explanation %></td>
-          </tr>
-        </th>
-      </table>
+    <div class = "row">
+      <div class ="col-md-2 offset-md-4"><h4>ジャンル:</h4></div>
+      <div class ="col-md-2"><%= @item_post.item_genre.genre %></div>
+      <div class ="col-md-2"><h4>投稿者:</h4></div>
+      <div class ="col-md-2"><%= @item_post.customer.display_name %></div>
     </div>
-  </div>
-  <div class = "row">
-    <div class ="col-md-2"><h4>ジャンル:</h4></div>
-    <div class ="col-md-2"><%= @item_post.item_genre.genre %></div>
-    <div class ="col-md-2"><h4>投稿者:</h4></div>
-    <div class ="col-md-2"><%= @item_post.customer.display_name %></div>
   </div>
 </div>
 
 <div class = "container">
-  <div class ="row">
+  <div class ="row mt-4">
     <%= form_with model: [@item_post, @review], local: true do |f| %>
       <table>
         <th>
           <tr>
-            <td>評価値</td>
-            <script>
-            </script>
-      
+            <td>評価</td>
+            <td></td>
           </tr>
           <tr>
             <td>レビュータイトル</td>
@@ -54,7 +54,7 @@
             <td>レビュー内容</td>
             <td>
               <% f.label :impression %>
-              <%= f.text_area :impression %>
+              <%= f.text_area :impression, size: "50x5"%>
             </td>
           </tr>
           <tr>
@@ -66,10 +66,10 @@
           </tr>
         </th>
       </table>
-      <div class="form-group">
+      <div class="form-group mt-2">
         <td></td>
         <td>
-          <%= f.submit 'レビューを投稿する', class: "btn btn-sm btn-success" %>
+          <%= f.submit 'レビューを投稿する', class: "btn-block btn-sm btn-success" %>
         </td>
       </div>
     <% end %>

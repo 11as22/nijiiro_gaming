@@ -1,32 +1,42 @@
- <% @reviews.each do |review| %>
-    <div class = "row">
-      <div class ="col-md-4">
-        <%= link_to customer_path(review.customer_id) do %>
-          <%= image_tag  review.customer.get_profile_image(150, 100), class: "small-image" %><br/>
-          投稿者名:<%= review.customer.display_name %>
-        <% end %>
-      </div>
-      <div class "col-md-8">
-        <%= link_to item_post_review_path(review.item_post.id, review.id) do %>
-        <table>
-          <th>
-            <tr>
-              <td>タイトル</td>
-              <td><%= review.title %></td>
-            </tr>
-            <tr>
-              <td>購入時価格</td>
-              <td><%= review.item_price %></td>
-            </tr>
-            <tr>
-              <td>本文</td>
-              <!--表示する本文を10文字に設定-->
-              <td><%= review.impression.truncate(10) %></td>
-            </tr>
-          </th>
-        </table>
-      <% end %>
-      </div>
+<div class = "container">
+  <h1><%= @customer.display_name %>さんのレビュー一覧</h1>
+   <% @reviews.each do |review| %>
+     <div class = "row border border-dark mt-2 mb-1">
+       <div class ="col-md-3">
+         <%= link_to customer_path(review.customer_id) do %>
+           <%= image_tag  review.customer.get_profile_image(150, 100), class: "small-image" %><br/>
+           投稿者名:<%= review.customer.display_name %>
+          <% end %>
+        </div>
+        <div class "col-md-9">
+          <%= link_to item_post_review_path(review.item_post.id, review.id) do %>
+            <table>
+              <th>
+                <tr>
+                  <td>評価値</td>
+                  <td colspan = "3">
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>タイトル</td>
+                  <td colspan = "3">
+                  <td><%= review.title %></td>
+                </tr>
+                <tr>
+                  <td>購入時価格</td>
+                  <td colspan = "3">
+                  <td><%= review.item_price %></td>
+                </tr>
+                <tr>
+                  <td>本文</td>
+                  <td colspan = "3">
+                  <!--表示する本文を10文字に設定-->
+                  <td><%= review.impression.truncate(10) %></td>
+                </tr>
+              </th>
+            </table>
+          <% end %>
+        </div>
     </div>
   <% end %>
 </div>

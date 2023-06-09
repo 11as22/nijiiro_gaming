@@ -20,7 +20,7 @@ class Public::ItemPostsController < ApplicationController
   end
 
   def index
-    #もしulrにcustomer_idを含んでいたら、その人のitem_postsを取得するコントローラー
+    #もしurlにcustomer_idを含んでいたら、その人のitem_postsを取得するコントローラー
     if params[:customer_id].present?
       @item_posts = ItemPost.where(customer_id: params[:customer_id])
     else
@@ -50,6 +50,9 @@ class Public::ItemPostsController < ApplicationController
   end
 
   def destroy
+    item_post = ItemPost.find(params[:id])
+    item_post.destroy
+    redirect_to item_posts_path
   end
 
   private

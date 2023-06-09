@@ -24,26 +24,25 @@
           <td><%= @customer.introduction %></td>
         </tr>
         <tr>
-          <td></td>
-          <% if @customer == current_customer %>
-            <td>
-              <%= link_to "編集する",edit_customer_path(@customer), class: "btn btn-success" %>
-            </td>
-          <% end %>
+          <td colspan = "2" class = "text-center">
+            <% if @customer == current_customer %>
+              <%= link_to "編集する",edit_customer_path(@customer), class: "btn-block btn-success" %>
+            <% end %>
+          </td>
         </tr>
       </th>
     </table>
-    <div class ="row">
-      <table class ="table">
-        <th>
-          <tr>
-            <!--商品投稿パスにcustomer_id に@customerの.idを渡す。-->
-            <td><%= link_to item_posts_path(customer_id: @customer.id) do %><%= @customer.display_name %>さんの商品投稿一覧<% end %></td>
-            <!--ヘルパーがないので、URLに@customer.idをわたし、@customerのレビューを表示-->
-            <td><%= link_to "/customer/#{@customer.id}/reviews" do %><%= @customer.display_name %>さんのレビュー投稿一覧<% end %></td>
-          </tr>
-        </th>
-      </table>
-    </div>
+  </div>
+  <div class ="row justify-content-md-center">
+    <table>
+      <th>
+        <tr>
+          <!--商品投稿パスにcustomer_id に@customerの.idを渡す。-->
+          <td class = "col-md-6"><%= link_to item_posts_path(customer_id: @customer.id) do %><%= @customer.display_name %>さんの商品投稿一覧<% end %></td>
+          <!--ヘルパーがないので、URLに@customer.idをわたし、@customerのレビューを表示-->
+          <td class ="col-md-6"><%= link_to "/customer/#{@customer.id}/reviews" do %><%= @customer.display_name %>さんのレビュー投稿一覧<% end %></td>
+        </tr>
+      </th>
+    </table>
   </div>
 </div>

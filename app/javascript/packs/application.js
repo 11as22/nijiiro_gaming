@@ -15,21 +15,14 @@ import "../stylesheets/application";
 
 import '@fortawesome/fontawesome-free/js/all'
 
-
-// raty使用
-window.$ = window.jQuery = require('jquery');
-require('packs/raty')
-
-require("jquery")
-
-
-
-// raty使用
-window.$ = window.jQuery = require('jquery');
-require('packs/raty')
+// import Raty from "raty.js"
+// window.raty = function(elem,opt){
+//     var raty =  new Raty(elem,opt)
+//     raty.init();
+//     return raty;
+// }
 
 require("jquery")
-
 
 Rails.start()
 // // Turbolinks.start()
