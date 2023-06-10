@@ -1,5 +1,8 @@
 class Public::ItemPostsController < ApplicationController
+  # ログインしていないユーザーの許されるアクション
   before_action :authenticate_customer!, except: [:index, :show]
+  # 他のカスマターが自分に対して行えないアクション
+  before_action :correct_customer, only: [:edit, :update, :destroy]
   def new
     @item_post = ItemPost.new
   end
@@ -56,6 +59,14 @@ class Public::ItemPostsController < ApplicationController
   end
 
   private
+  
+  def correct_customer
+    @item_post = ItemPost.find(params[:id])
+    #投稿したユーザーとログインしているユーザーが合致していなければホームへ
+    unless @item_post.customer.id == current_customer.id
+      redirect_to root_path
+    end
+  end
 
   def item_post_params
     params.require(:item_post).permit(:item_genre_id, :item_name, :item_explanation, :model_number, :item_image, :customer_id)
