@@ -49,7 +49,9 @@
                             });
                         </script>
                     </td>
-                    <td class = "col-md-3"><small><%= item_post.reviews.average(:star).to_f.round(1) %>点(レビュー<%= item_post.reviews.count %>件)</small></td>
+                    <td class = "col-md-3">
+                      <small><%= item_post.reviews.average(:star).to_f.round(1) %>点(レビュー<%= item_post.reviews.count %>件)</small>
+                    </td>
                   </tr>
                 </th>
               </table>
