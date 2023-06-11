@@ -4,29 +4,29 @@
   <div class =" mt-4 border border-success">
     <div class = "row">
       <div class = "col-md-4 mt-4">
-          <%= image_tag  @item_post.get_item_image(250, 200), class: "large-image" %>
+        <%= image_tag  @item_post.get_item_image(250, 200), class: "large-image" %>
       </div>
       <div class ="col-md-8">
         <table>
           <th>
             <tr>
-              <td>商品名</td>
-              <td><%= @item_post.item_name %></td>
+              <td class ="col-md-4">商品名</td>
+              <td class ="col-md-4"><%= @item_post.item_name %></td>
             </tr>
             <tr>
-              <td>商品モデル番号</td>
-              <td><%= @item_post.model_number %></td>
+              <td class ="col-md-4">商品モデル番号</td>
+              <td class ="col-md-4"><%= @item_post.model_number %></td>
             </tr>
             <tr>
-              <td>商品説明文</td>
-              <td><%= @item_post.item_explanation %></td>
+              <td class ="col-md-4">商品説明文</td>
+              <td class ="col-md-4"><%= @item_post.item_explanation %></td>
             </tr>
           </th>
         </table>
       </div>
     </div>
     <div class = "row">
-      <div class ="col-md-2"><h4>ジャンル:</h4></div>
+      <div class ="col-md-2 offset-md-4"><h4>ジャンル:</h4></div>
       <div class ="col-md-2"><%= @item_post.item_genre.genre %></div>
       <div class ="col-md-2"><h4>投稿者:</h4></div>
       <div class ="col-md-2"><%= @item_post.customer.display_name %></div>
@@ -35,14 +35,35 @@
 </div>  
 
 <div class = "container">
-  <div class ="row">
-    <%= form_with model: [@item_post, @review], local: true do |f| %>
+  <%= form_with model: [@item_post, @review], local: true do |f| %>
+    <div class ="row mt-4">
+      <p class="ml-3">評価</p>
+      <!--raty使用-->
+      <div class="form-group ml-3" id="star">
+        <% f.label :star %>
+        <%= f.hidden_field :star, id: :review_star, class: 'form-control' %>
+        <div id="post_raty"></div>
+      </div>
+        <script>
+          $(document).on('turbolinks:load', function() {
+            let elem = document.querySelector('#post_raty');
+            if (elem == null) return;
+      
+            elem.innerHTML = ""
+            let opt = {  
+              starOn: "<%= asset_path('star-on.png') %>",
+              starOff: "<%= asset_path('star-off.png') %>",
+              starHalf: "<%= asset_path('star-half.png') %>",
+              score : <%= @review.star %>,
+              half: true,
+              scoreName: 'review[star]',
+            };
+            raty(elem, opt);
+          });
+        </script>
+      </div>
       <table>
         <th>
-          <tr>
-            <td>評価値</td>
-            <td></td>
-          </tr>
           <tr>
             <td>レビュータイトル</td>
             <td>
@@ -54,7 +75,7 @@
             <td>レビュー内容</td>
             <td>
               <% f.label :impression %>
-              <%= f.text_area :impression, placeholder: @review.impression %>
+              <%= f.text_area :impression, placeholder: @review.impression, size: "50x15" %>
             </td>
           </tr>
           <tr>
@@ -69,12 +90,11 @@
       <div class="form-group">
         <td></td>
         <td>
-          <%= f.submit 'レビューを更新する', class: "btn btn-sm btn-success" %>
+          <%= f.submit 'レビューを更新する', class: "btn btn-success" %>
         </td>
       </div>
     <% end %>
+    <div class ="row ml-1">
+      <%= link_to "レビューを削除する", item_post_review_path(@item_post, @review), data: {confirm: "レビューを削除します。よろしいですか？"}, method: :delete, class: "btn btn-sm btn-danger" %>
+    </div>
   </div>
-  <div class ="row justify-content-between">
-    <%= link_to "レビューを削除する", item_post_review_path(@item_post, @review), data: {confirm: "レビューを削除します。よろしいですか？"}, method: :delete, class: "btn btn-danger" %>
-  </div>
-</div>

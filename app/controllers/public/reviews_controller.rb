@@ -1,4 +1,8 @@
 class Public::ReviewsController < ApplicationController
+  # ログインしていないユーザーの許されるアクション
+  before_action :authenticate_customer!, except: [:index, :show]
+  #他のカスマター自分に対して行えないアクション
+  before_action :correct_customer, only: [:edit, :update, :destroy]
   def new
     @item_post = ItemPost.find(params[:item_post_id])
     @review = Review.new
@@ -57,6 +61,14 @@ class Public::ReviewsController < ApplicationController
   end
   
   private
+  def correct_customer
+    @item_post = ItemPost.find(params[:item_post_id])
+    @review = Review.find(params[:id])
+    #投稿したユーザーとログインしているユーザーが合致していなければホームへ
+    unless @review.customer.id == current_customer.id
+      redirect_to root_path
+    end
+  end
 
   def review_params
    params.require(:review).permit(:customer_id, :item_post_id, :title, :impression, :item_price, :star)

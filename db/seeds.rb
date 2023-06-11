@@ -34,7 +34,7 @@ Customer.create(
 
 Customer.create(
   display_name: "test2",
-  email: "texs2@gmail.com",
+  email: "test2@gmail.com",
   password: '222222',
 )
 

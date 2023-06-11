@@ -10,7 +10,7 @@ import "channels"
 //bootstrapの記述
 import "jquery";
 import "popper.js";
-import "bootstrap";
+
 import "../stylesheets/application";
 
 import '@fortawesome/fontawesome-free/js/all'
@@ -22,8 +22,19 @@ import '@fortawesome/fontawesome-free/js/all'
 //     return raty;
 // }
 
+
+import "bootstrap";
 require("jquery")
 
+import Raty from "raty.js"
+window.raty = function(elem,opt) {
+  let raty =  new Raty(elem,opt)
+  raty.init();
+  return raty;
+}
+
+window.$ = window.jQuery = require('jquery');
+
 Rails.start()
-// // Turbolinks.start()
+Turbolinks.start()
 ActiveStorage.start()

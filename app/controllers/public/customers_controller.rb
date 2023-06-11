@@ -1,4 +1,8 @@
 class Public::CustomersController < ApplicationController
+   # ログインしていないユーザーの許されるアクション
+  before_action :authenticate_customer!, except: [:reviews, :show]
+   # 他のカスタマーが自分に対して行えないアクション
+  before_action :correct_customer, only: [:edit, :update, :destroy]
   def index
     @customer = Customer.find(params[:id]) 
     @item_posts = @customer.item_posts.all
@@ -33,4 +37,12 @@ class Public::CustomersController < ApplicationController
     def customer_params
       params.require(:customer).permit(:email, :display_name, :introduction, :profile_image)
     end
+   
+  def correct_customer
+    @customer = Customer.find(params[:id])
+    unless @customer.id == current_customer.id
+      redirect_to root_path
+    end
+  end
+    
 end
