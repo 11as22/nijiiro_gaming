@@ -47,7 +47,26 @@
         <th>
           <tr>
             <td>評価</td>
-            <td></td>
+            <td>
+            <div id="star_<%= @review.id %>"></div>
+              <script>
+              $(document).on('turbolinks:load', function() {
+                let elem = document.querySelector('#star_<%= @review.id %>');
+                if (elem == null) return;
+              
+                elem.innerHTML = "";
+                let opt = {
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  score: "<%= @review.star %>",
+                  readOnly: true,
+                };
+                raty(elem, opt);
+              });
+              </script>
+              </td>
+              <td><%= @review.star %>点</td>
           </tr>
           <tr>
             <td>タイトル</td>
