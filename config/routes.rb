@@ -1,16 +1,19 @@
 Rails.application.routes.draw do
 
-get "search" => "searches#search"
 devise_for :customers, skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
-
+# ゲストサインイン実装
+devise_scope :customer do
+  post '/customers/guest_sign_in', to: 'public/sessions#guest_sign_in'
+end
 # 管理者用
 # URL /admin/sign_in ...
 devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
+
 
   # 管理者側のルーティング設定
   namespace :admin do
@@ -26,17 +29,23 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
   scope module: :public do
     resources :item_posts, only:[:new, :create, :index, :show, :edit, :update, :destroy] do
+      resource :item_favorites, only: [:index, :create, :destroy]
       resources :reviews, only:[:new, :create, :index, :show, :edit, :update, :destroy]
     end
 
     get '/customer/:customer_id/reviews' => 'customers#reviews'
 
-    resources :customers, only:[:index,:show, :edit, :update]
+    resources :customers, only:[:index,:show, :edit, :update] do
+      member do
+        get :favorites
+      end
+    end
+    
     resources :review_comments, only:[:new, :create, :index, :destroy]
     root to: 'homes#top'
     get '/about' =>'homes#about'
     get '/genre/:id' =>'homes#index', as: 'index'
-    get "search" => "searches#search"
+    get '/search' => 'searches#search'
   end
 
 

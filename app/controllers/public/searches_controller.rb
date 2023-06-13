@@ -1,11 +1,38 @@
 class Public::SearchesController < ApplicationController
   def search
-    @range = params[:range]
+    # viewのform_tagにて
+    # 選択したmodelの値を@modelに代入。
+    @column = params["column"]
+    # 選択した検索方法の値を@methodに代入。
+    @method = params["method"]
+    # 検索ワードを@contentに代入。
+    @content = params["content"]
+    # @model, @content, @methodを代入した、
+    # search_forを@recordsに代入。
+    @records = search_for(@column, @content, @method)
+    render "public/searches/search_result"
+  end
 
-    if @range == "商品モデル番号"
-      @model_numbers = ItemPost.model_number.looks(params[:search], params[:word])
-    else
-      @item_names = ItemPost.item_name.looks(params[:search], params[:word])
+  private
+  
+  def search_for(column, content, method)
+    # 選択したモデルがuserだったら
+    if column == 'model_number'
+      # 選択した検索方法がが完全一致だったら
+      if method == 'perfect'
+        ItemPost.where(model_number: content)
+      # 選択した検索方法がが部分一致だったら
+      else
+        ItemPost.where('model_number LIKE ?', '%'+content+'%')
+      end
+    # 選択したモデルがpostだったら
+    elsif column == 'item_name'
+      if method == 'perfect'
+        ItemPost.where(item_name: content)
+      else
+        ItemPost.where('item_name LIKE ?', '%'+content+'%')
+      end
     end
   end
 end
+

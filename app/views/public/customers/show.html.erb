@@ -30,6 +30,12 @@
             <% end %>
           </td>
         </tr>
+        <% if @customer == current_customer %>
+          <tr>
+            <td colspan = "1"></td>
+            <td><%= link_to "いいねした投稿", favorites_customer_path(@customer) %></td>
+          </tr>
+        <% end %>
       </th>
     </table>
   </div>
@@ -37,6 +43,7 @@
     <table>
       <th>
         <tr>
+          <td></td>
           <!--商品投稿パスにcustomer_id に@customerの.idを渡す。-->
           <td class = "col-md-6"><%= link_to item_posts_path(customer_id: @customer.id) do %><%= @customer.display_name %>さんの商品投稿一覧<% end %></td>
           <!--ヘルパーがないので、URLに@customer.idをわたし、@customerのレビューを表示-->

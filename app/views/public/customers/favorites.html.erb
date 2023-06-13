@@ -1,22 +1,12 @@
 <div class="container">
   <div class="row">
     <!--ジャンル検索画面-->
-    <div class="col-md-2">
-      <%= render 'public/homes/genre', genres: @genres %>
-    </div>
     <!--商品一覧画面-->
     <div class ="col-md-10">
       <div class ="row ml-2">
-        <p>全商品投稿一覧(全<%= @item_post_count %>件)</p>
-        <div class ="offset-md-3">
-          <%= render 'public/searches/search' %>
-        </div>
+        <p>いいね商品投稿一覧(全<%= @favorite_posts.count %>件)</p>
       </div>
-      <div class ="row offset-md-7">
-        <%= link_to 'レビューの多い順の高い順', item_posts_path(review_count: "true") %>|<%= link_to '平均評価の高い順', item_posts_path(review_rate: "true") %>
-      </div>
-      
-      <% @item_posts.each do |item_post| %>
+      <% @favorite_posts.each do |item_post|%>
         <%= link_to item_post_path(item_post.id), class: "text-decoration-none text-dark" do %>
           <div class = "row border border-success mt-2 mb-1">
             <div class ="col-md-4">
@@ -66,9 +56,7 @@
     </div>
   </div>
 </div>
-      <!--ページ選択-->
-      <!--<div class = "mx-auto">-->
-      <!--  <#= paginate @items %>-->
-      <!--</div>-->
-    </div>
-  </div>
+
+
+
+

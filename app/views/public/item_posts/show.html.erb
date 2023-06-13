@@ -3,7 +3,20 @@
   <div class =" mt-4 border border-success">
     <div class = "row">
       <div class = "col-md-4 mt-4">
-          <%= image_tag  @item_post.get_item_image(250, 200), class: "large-image" %>
+        <%= image_tag  @item_post.get_item_image(250, 200), class: "large-image" %>
+        <div class ="row ml-3">
+          <% if @item_post.favorited?(current_customer) %>
+            <!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
+            <%= link_to  item_post_item_favorites_path(@item_post.id), method: :delete do %>
+              <span>いいねを外す❤︎</span>
+            <% end %>
+          <% else %>
+           <!--一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
+            <%= link_to item_post_item_favorites_path(@item_post.id), method: :post do %>
+              <span>いいねをする♡︎</span>
+            <% end %>
+        <% end %>
+        </div>
       </div>
       <div class ="col-md-8">
         <table>
