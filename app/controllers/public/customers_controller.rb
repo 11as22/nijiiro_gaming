@@ -1,6 +1,6 @@
 class Public::CustomersController < ApplicationController
    # ログインしていないユーザーの許されるアクション
-  before_action :authenticate_customer!, except: [:reviews, :show]
+  before_action :authenticate_customer!
    # 他のカスタマーが自分に対して行えないアクション
   before_action :correct_customer, only: [:edit, :update, :destroy, :favorites]
   def index

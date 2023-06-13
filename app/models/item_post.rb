@@ -26,7 +26,7 @@ class ItemPost < ApplicationRecord
   end
   
   def favorited?(customer)
-   item_favorites.where(customer_id: customer.id).exists?
+    item_favorites.where(customer_id: customer.id).exists?
   end
   
   

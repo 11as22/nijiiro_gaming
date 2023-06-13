@@ -1,0 +1,39 @@
+<% if customers.exists? %>
+  <div class ="container">
+    <div class ="row">
+      <table class='table'>
+        <thead>
+          <tr>
+            <th></th>
+            <th>表示名</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @customers.each do |customer| %>
+            <tr>
+              <td><%= image_tag customer.get_profile_image(150,100), class: "small-image" %></td>
+              <td><%= link_to customer_path(customer) do %>
+                <%= customer.display_name %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to customer_followings_path(customer) do %>
+                  <h6>フォロー<%= customer.followings.count %>人</h6>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to customer_followers_path(customer) do %>
+                  <h6>フォロワー<%= customer.followers.count %>人</h6>
+                <% end %> 
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% else %>
+  <p>ユーザーはいません</p>
+<% end %>

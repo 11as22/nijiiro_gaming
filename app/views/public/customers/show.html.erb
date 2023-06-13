@@ -4,10 +4,27 @@
     <div class ="col-md-auto">
       <h1><%= @customer.display_name %>さんのページ</h1>
       <%= image_tag @customer.get_profile_image(250,200), class: "large-image" %>
+      <div>
+        <%= link_to customer_followings_path(@customer) do %>
+          フォロー<%= @customer.followings.count %>人
+        <% end %>
+        <%= link_to customer_followers_path(@customer), class: "ml-5" do%>
+          フォロワー<%= @customer.followers.count %>人
+        <% end %>
+      </div>
+      <div>
+        <% if current_customer != @customer %>
+          <% if current_customer.following?(@customer) %>
+            <%= link_to "フォロー外す", customer_relationships_path(@customer.id), method: :delete, class: "btn btn-block btn-danger" %>
+          <% else %>
+            <%= link_to "フォローする", customer_relationships_path(@customer.id), method: :post, class: "btn btn-block btn-success" %>
+          <% end %>
+        <% end %>
+    </div>
     </div>
   </div>
   <div class ="row">
-    <table class = "table">
+    <table class = "table table-borderless">
       <th>
         <tr>
           <td>表示名</td>
