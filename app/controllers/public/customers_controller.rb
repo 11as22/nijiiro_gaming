@@ -2,7 +2,7 @@ class Public::CustomersController < ApplicationController
    # ログインしていないユーザーの許されるアクション
   before_action :authenticate_customer!, except: [:reviews, :show]
    # 他のカスタマーが自分に対して行えないアクション
-  before_action :correct_customer, only: [:edit, :update, :destroy]
+  before_action :correct_customer, only: [:edit, :update, :destroy, :favorites]
   def index
     @customer = Customer.find(params[:id]) 
     @item_posts = @customer.item_posts.all
@@ -31,12 +31,19 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:customer_id])
     @reviews = @customer.reviews
   end
+  
+  def favorites
+    # ユーザーidが、このユーザーの、いいねのレコードを全て取得。item_post_idも一緒に持ってくる。引数にその情報を入れると、favoritesの中身には、あるユーザーがいいねした商品投稿のid。
+    favorites = ItemFavorite.where(customer_id: @customer.id).pluck(:item_post_id)
+    @favorite_posts = ItemPost.find(favorites)
+  end
+
 
   private
     
-    def customer_params
-      params.require(:customer).permit(:email, :display_name, :introduction, :profile_image)
-    end
+  def customer_params
+    params.require(:customer).permit(:email, :display_name, :introduction, :profile_image, :item_favorites)
+  end
    
   def correct_customer
     @customer = Customer.find(params[:id])

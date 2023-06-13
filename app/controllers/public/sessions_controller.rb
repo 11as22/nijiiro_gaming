@@ -5,6 +5,12 @@ class Public::SessionsController < Devise::SessionsController
   before_action :customer_state, only: [:create]
 
   # GET /resource/sign_in
+  def guest_sign_in
+    customer = Customer.guest
+    sign_in customer
+    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
+  
   def new
     super
   end

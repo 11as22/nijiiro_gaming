@@ -9,20 +9,13 @@ class ItemPost < ApplicationRecord
   belongs_to :customer
   
   has_one_attached :item_image
-  
-  def  self.looks(search, word)
-    if search == "perfect_match"
-      @user = User.where("name LIKE?", "#{word}")
-    elsif search == "forward_match"
-      @user = User.where("name LIKE?","#{word}%")
-    elsif search == "backward_match"
-      @user = User.where("name LIKE?","%#{word}")
-    elsif search == "partial_match"
-      @user = User.where("name LIKE?","%#{word}%")
-    else
-      @user = User.all
-    end
-  end
+  # ------ソートの記述---------
+  #レビューの平均評価値が高い順
+  # SQLから取り出し
+  scope :review_rate, -> { left_joins(:reviews).group(:id).order('AVG(reviews.star) DESC') }
+  # レビューの多い順
+  scope :review_count, -> { includes(:reviews).sort {|a,b| b.reviews.count <=> a.reviews.count }}
+  # ----------------------------
   
   def get_item_image(width, height)
     unless item_image.attached?
@@ -31,5 +24,10 @@ class ItemPost < ApplicationRecord
     end
     item_image.variant(resize_to_limit: [width, height]).processed
   end
+  
+  def favorited?(customer)
+   item_favorites.where(customer_id: customer.id).exists?
+  end
+  
   
 end

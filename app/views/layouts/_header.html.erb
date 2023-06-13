@@ -2,7 +2,7 @@
   <%= link_to root_path do %>
     <h1>にじいろゲーミング</h1>
   <% end %>
-  
+
   <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
     <ul class="navbar-nav ml-auto">
       <!--管理者がログインしていたら-->
@@ -34,7 +34,7 @@
           <p class="text-light mr-5 mt-4">
             ようこそ <strong><%= current_customer.display_name %></strong> さん!
           </p>
-        <% end %>  
+        <% end %>
         <li>
           <%= link_to about_path, class: "nav-link text-light" do %>
             About
@@ -57,6 +57,11 @@
         </li>
       <!--ログイン前画面-->
       <% else %>
+        <li>
+          <%= link_to customers_guest_sign_in_path, method: :post, class: "nav-link text-light" do %>
+            ゲストログイン
+          <% end %>
+        </li>
         <li>
           <%= link_to about_path, class: "nav-link text-light" do %>
             About
