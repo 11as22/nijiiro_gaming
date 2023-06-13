@@ -15,6 +15,16 @@ class Customer < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :review_comments, dependent: :destroy
   has_many :item_favorites, dependent: :destroy
+  
+  # フォローをした、フォローをされたの関係
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  
+  # フォロー・フォロワーの一覧画面で、customer.followersという記述でフォロワーを表示したいので、throughでスルーするテーブル、sourceで参照するカラムを指定。
+  # 一覧画面で使う
+  has_many :followings, through: :relationships, source: :followed
+  has_many :followers, through: :reverse_of_relationships, source: :follower
+
 
   has_one_attached :profile_image
   
@@ -36,5 +46,19 @@ class Customer < ApplicationRecord
       # 例えば name を入力必須としているならば， user.name = "ゲスト" なども必要
     end
   end
+  
+  #-----フォロー,フォロワー機能-------
+  def follow(customer_id)
+    relationships.create(followed_id: customer_id)
+  end
+  # フォローを外すときの処理
+  def unfollow(customer_id)
+    relationships.find_by(followed_id: customer_id).destroy
+  end
+  # フォローしているか判定
+  def following?(customer)
+    followings.include?(customer)
+  end
+ #--------------------------
 
 end

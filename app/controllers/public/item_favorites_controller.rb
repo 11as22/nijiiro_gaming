@@ -1,10 +1,6 @@
 class Public::ItemFavoritesController < ApplicationController
-  before_action :authenticate_customer!, except: [:create, :destroy]
-  
-  def index
-    
-  end
-  
+  before_action :authenticate_customer!
+
   def create
     @item_favorite = ItemFavorite.new(customer_id: current_customer.id, item_post_id: params[:item_post_id])
     @item_favorite.save
