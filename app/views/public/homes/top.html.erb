@@ -1,17 +1,19 @@
 <!--フラッシュ表示-->
 <%= flash[:notice] %>
-<div class="container">
+<div class="container d-flex align-items-center justify-content-center">
   <div class="row">
-     <div class="card text-white mb-3">
-        <img class="card-img" src="nijiiro_gaming_top.jpg" alt="">
+     <div class="card text-white">
+        <img class="card-img" src="/assets/nijiiro_gaming_top.jpg" alt="">
         <div class="card-img-overlay d-flex align-items-center justify-content-center">
         <div class="top-message">
           <h3 class= "stroke">
-            ようこそ、ながのCAKEへ！<br>
-            このサイトは、ケーキ販売のECサイトになります。<br>
-            会員でない方も商品の閲覧はできますが、<br>
-            購入には会員登録が必要になります。
+            にじいろゲーミングへようこそ!<br>
+            ゲーミングデバイスのレビューサイトです。<br>
+            会員でない方も商品の閲覧はできます。<br>
+            aboutページでサイトの説明をご覧ください。<br>
           </h3>
+          <h5>現在投稿されている商品投稿件数：<%= @item_post_count %>件</h5>
+          <h5>現在投稿されていレビュー件数：<%= @review_count %>件</h5>
         </div>
       </div>
     </div>
