@@ -1,7 +1,7 @@
 class Public::HomesController < ApplicationController
   def top
-    @item_posts = ItemPost.all
-    @genres = ItemGenre.all
+    @item_post_count = ItemPost.includes(:item_name).count
+    @review_count = Review.includes(:review).count
   end
   
   def index

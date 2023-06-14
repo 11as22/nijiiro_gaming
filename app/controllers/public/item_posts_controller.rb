@@ -1,6 +1,6 @@
 class Public::ItemPostsController < ApplicationController
   # ログインしていないユーザーの許されるアクション
-  before_action :authenticate_customer!, except: [:index]
+  before_action :authenticate_customer!, except: [:index, :show]
   # 他のカスマターが自分に対して行えないアクション
   before_action :correct_customer, only: [:edit, :update, :destroy]
   def new

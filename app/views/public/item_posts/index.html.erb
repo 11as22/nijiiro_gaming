@@ -19,7 +19,7 @@
       <% @item_posts.each do |item_post| %>
         <%= link_to item_post_path(item_post.id), class: "text-decoration-none text-dark" do %>
           <div class = "row border border-success mt-2 mb-1">
-            <div class ="col-md-4">
+            <div class ="col-md-4 d-flex align-items-center">
               <%= image_tag  item_post.get_item_image(150, 100), class: "small-image" %>
             </div>
             <div class = "col-md-8 ">
