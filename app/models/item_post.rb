@@ -1,6 +1,6 @@
 class ItemPost < ApplicationRecord
-  validates :item_name, presence: true, length: { in: 1..50}
-  validates :item_explanation, presence: true, length: { in: 1..200 }
+  validates :item_name, presence: true, length: { in: 1..40}
+  validates :item_explanation, presence: true, length: { in: 1..150 }
   validates :model_number, length: {maximum: 30}
   
   has_many :item_favorites, dependent: :destroy

@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class = "navbar navbar-expand-lg" style = "background-color: #e23030d4;">
   <%= link_to root_path do %>
-    <h1>にじいろゲーミング</h1>
+    <img class="gaming" src="/assets/LOGO2.PNG" alt="">
   <% end %>
 
   <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
@@ -15,13 +15,13 @@
       </li>
       <li>
         <%= link_to admin_customers_path, class: "nav-link text-light" do %>
-          <i class = "fas fa-users fa-spin" style = "color: #70ffdb;"></i>
+          <i class = "fas fa-users fa-spin" style = "color: #ffe070;"></i>
           会員一覧
         <% end %>
       </li>
       <li>
         <%= link_to admin_item_genres_path, class: "nav-link text-light" do %>
-          <i class = "fas fa-link fa-spin" style = "color: #ffe070;"></i>
+          <i class = "fas fa-link fa-spin" style = "color: #70ffdb;"></i>
           ジャンル一覧
         <% end %>
       </li>
@@ -35,24 +35,24 @@
       <% elsif customer_signed_in? %>
         <%= link_to customer_path(current_customer) do %>
           <p class = "text-light mt-2 mr-2">
-            <i class = "fas fa-user-cog fa-spin" style = "color: #ff7070;"></i>ようこそ <strong style = "color: #8f70ff;"><%= current_customer.display_name %></strong> さん!
+            <i class = "fas fa-user-cog fa-spin" style = "color: #ff7070;"></i>ようこそ <strong style = "color: #ffa970;"><%= current_customer.display_name %></strong> さん!
           </p>
         <% end %>
         <li>
           <%= link_to about_path, class: "nav-link text-light" do %>
-            <i class="fas fa-scroll fa-spin" style = "color: #70ffdb;"></i>
+            <i class="fas fa-scroll fa-spin" style = "color: #ffe070;"></i>
             About
           <% end %>
         </li>
         <li>
           <%= link_to item_posts_path, class: "nav-link text-light" do %>
-            <i class = "far fa-keyboard fa-spin" style = "color: #ffe070;"></i>
+            <i class = "far fa-keyboard fa-spin" style = "color: #70ffdb;"></i>
             商品一覧
           <% end %>
         </li>
         <li>
           <%= link_to new_item_post_path, class: "nav-link text-light" do %>
-            <i class = "fas fa-folder-plus fa-spin" style = "color: #ffa970;"></i>
+            <i class = "fas fa-folder-plus fa-spin" style = "color: #8f70ff;"></i>
             新規商品追加
           <% end %>
         </li>
@@ -72,25 +72,25 @@
         </li>
         <li>
           <%= link_to about_path, class: "nav-link text-light" do %>
-            <i class="fas fa-scroll fa-spin" style = "color: #8f70ff;"></i>
+            <i class="fas fa-scroll fa-spin" style = "color: #ffa970;"></i>
             About
           <% end %>
         </li>
         <li>
           <%= link_to item_posts_path, class: "nav-link text-light" do %>
-            <i class="far fa-keyboard fa-spin" style = "color: #70ffdb;"></i>
+            <i class="far fa-keyboard fa-spin" style = "color: #ffe070;"></i>
             商品一覧
           <% end %>
         </li>
         <li>
           <%= link_to new_item_post_path, class: "nav-link text-light" do %>
-            <i class="fas fa-folder-plus fa-spin" style = "color: #ffe070;"></i>
+            <i class="fas fa-folder-plus fa-spin" style = "color: #70ffdb;"></i>
             新規商品追加
           <% end %>
         </li>
         <li>
           <%= link_to new_customer_registration_path, class: "nav-link text-light" do %>
-            <i class="fas fa-user-edit fa-spin" style = "color: #ffa970;"></i>
+            <i class="fas fa-user-edit fa-spin" style = "color: #8f70ff;"></i>
             新規登録
           <% end %>
         </li>
