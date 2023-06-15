@@ -7,7 +7,7 @@ class Customer < ApplicationRecord
   
   #表示名の使用文字の条件 1~15文字以上
   validates :display_name, length: { in: 1..15}, presence: true, uniqueness: true, format: { with: /\A[a-z0-9]+\z/ }
-  validates :introduction, length:{maximum: 50}
+  validates :introduction, length:{maximum: 30}
   validates :email, presence: true
   validates :encrypted_password, presence: true, length: { minimum: 6 }
   

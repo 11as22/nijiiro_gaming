@@ -1,63 +1,69 @@
 <div class = "container">
 <h1><%= @customer.display_name %>さんのレビュー一覧</h1>
+      
+  <!--ランダムでアイテム一覧の背景色を変える-->
+  <% colors = %w|#6DFF8D50 #5EECF050 #E6E15050 #FFC77750 #CEA1FF50 #FFA1FD50 #0107FF50| %>
   <% @reviews.each do |review| %>
-    <div class = "row border border-dark mt-2 mb-1">
-      <div class ="col-md-4">
-        <%= link_to customer_path(review.customer_id) do %>
-          <%= image_tag  review.customer.get_profile_image(150, 100), class: "small-image" %><br/>
-            投稿者名:<%= review.customer.display_name %>
+    <!--ここでdivとその背景色を作成する。-->
+    <%= content_tag :div, class: "col-md-12", style: "background-color: #{colors.sample}" do %>
+      <div class = "row border border-dark mt-2 mb-1">
+        <div class ="col-md-4">
+          <%= link_to customer_path(review.customer_id) do %>
+            <%= image_tag  review.customer.get_profile_image(150, 100), class: "small-image" %><br/>
+              投稿者名:<%= review.customer.display_name %>
+            <% end %>
+        </div>
+        <div class "col-md-8">
+          <%= link_to item_post_review_path(review.item_post.id, review.id) do %>
+            <table>
+              <th>
+                <tr>
+                  <td>評価</td>
+                  <td colspan = "3">
+                  <td>
+                    <div id="star_<%= review.id %>"></div>
+                    <script>
+                      $(document).on('turbolinks:load', function() {
+                        let elem = document.querySelector('#star_<%= review.id %>');
+                        if (elem == null) return;
+                      
+                        elem.innerHTML = "";
+                        let opt = {
+                          starOn: "<%= asset_path('star-on.png') %>",
+                          starOff: "<%= asset_path('star-off.png') %>",
+                          starHalf: "<%= asset_path('star-half.png') %>",
+                          score: "<%= review.star %>",
+                          readOnly: true,
+                        };
+                        raty(elem, opt);
+                      });
+                    </script>
+                  </td>
+                  <td>
+                    <%= review.star %>点
+                  </td>
+                </tr>
+                <tr>
+                  <td>タイトル</td>
+                  <td colspan = "3">
+                  <td><%= review.title %></td>
+                </tr>
+                <tr>
+                  <td>購入時価格</td>
+                  <td colspan = "3">
+                  <td><%= review.item_price %></td>
+                </tr>
+                <tr>
+                  <td>本文</td>
+                  <td colspan = "3">
+                  <!--表示する本文を10文字に設定-->
+                  <td><%= review.impression.truncate(10) %></td>
+                </tr>
+              </th>
+            </table>
           <% end %>
+        </div>
       </div>
-      <div class "col-md-8">
-        <%= link_to item_post_review_path(review.item_post.id, review.id) do %>
-          <table>
-            <th>
-              <tr>
-                <td>評価</td>
-                <td colspan = "3">
-                <td>
-                  <div id="star_<%= review.id %>"></div>
-                  <script>
-                    $(document).on('turbolinks:load', function() {
-                      let elem = document.querySelector('#star_<%= review.id %>');
-                      if (elem == null) return;
-                    
-                      elem.innerHTML = "";
-                      let opt = {
-                        starOn: "<%= asset_path('star-on.png') %>",
-                        starOff: "<%= asset_path('star-off.png') %>",
-                        starHalf: "<%= asset_path('star-half.png') %>",
-                        score: "<%= review.star %>",
-                        readOnly: true,
-                      };
-                      raty(elem, opt);
-                    });
-                  </script>
-                </td>
-                <td>
-                  <%= review.star %>点
-                </td>
-              </tr>
-              <tr>
-                <td>タイトル</td>
-                <td colspan = "3">
-                <td><%= review.title %></td>
-              </tr>
-              <tr>
-                <td>購入時価格</td>
-                <td colspan = "3">
-                <td><%= review.item_price %></td>
-              </tr>
-              <tr>
-                <td>本文</td>
-                <td colspan = "3">
-                <!--表示する本文を10文字に設定-->
-                <td><%= review.impression.truncate(10) %></td>
-              </tr>
-            </th>
-          </table>
-        <% end %>
-      </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
