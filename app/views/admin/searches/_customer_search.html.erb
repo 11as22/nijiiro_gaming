@@ -1,0 +1,10 @@
+<div class="search_form">
+  <%= form_with url: admin_search_path, local: true, method: :get do |f| %>
+    <%= f.text_field :content %>
+    <%= f.select :column, options_for_select({ "表示名" => "display_name", "メールアドレス" => "email" }) %>
+    <%= f.select :method, options_for_select({ "完全一致" => "perfect", "部分一致" => "partial" }) %>
+    <%= button_tag type: "submit", class: "btn btn-primary" do %>
+     <i class="fab fa-searchengin"></i>検索
+    <% end %>
+  <% end %>
+</div>

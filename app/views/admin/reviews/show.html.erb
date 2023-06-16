@@ -1,2 +1,95 @@
-<h1>Admin::Reviews#show</h1>
-<p>Find me in app/views/admin/reviews/show.html.erb</p>
+<div class = "container">
+  <h1>レビュー詳細画面</h1>
+  <%= flash[:notice] %>
+  <div class =" mt-4 border border-success">
+    <div class = "row">
+      <div class = "col-md-4 mt-4">
+          <%= image_tag  @item_post.get_item_image(200, 150), class: "middle-image" %>
+      </div>
+      <div class ="col-md-8">
+        <table>
+          <th>
+            <tr>
+              <td class = "col-md-3"><h5>商品名</h5></td>
+              <td class = "col-md-5"><%= @item_post.item_name %></td>
+            </tr>
+            <tr>
+              <td class = "col-md-3"><h5>商品モデル番号</h5></td>
+              <td class = "col-md-5"><%= @item_post.model_number %></td>
+            </tr>
+            <tr>
+              <td class = "col-md-3"><h5>商品説明文</h5></td>
+              <!--表示する商品説明を20文字-->
+              <td class = "col-md-5"><%= @item_post.item_explanation.truncate(20) %></td>
+            </tr>
+          </th>
+        </table>
+      </div>
+    </div>
+    <div class = "row">
+      <div class ="col-md-4">
+      </div>
+      <div class ="col-md-2"><h4>ジャンル:</h4></div>
+      <div class ="col-md-2"><%= @item_post.item_genre.genre %></div>
+      <div class ="col-md-2"><h4>投稿者:</h4></div>
+      <div class ="col-md-2"><%= @item_post.customer.display_name %></div>
+    </div>
+  </div>
+  <div class = "row mt-4 border border-dark">
+    <div class ="col-md-4">
+      <%= link_to admin_customer_path(@review.customer) do %>
+        <%= image_tag  @review.customer.get_profile_image(250, 200), class: "large-image" %><br/>
+        投稿者名:<%= @review.customer.display_name %>
+      <% end %>
+    </div>
+    <div class "col-md-8">
+      <table>
+        <th>
+          <tr>
+            <td>評価</td>
+            <td>
+            <div id="star_<%= @review.id %>"></div>
+              <script>
+              $(document).on('turbolinks:load', function() {
+                let elem = document.querySelector('#star_<%= @review.id %>');
+                if (elem == null) return;
+              
+                elem.innerHTML = "";
+                let opt = {
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  score: "<%= @review.star %>",
+                  readOnly: true,
+                };
+                raty(elem, opt);
+              });
+              </script>
+              </td>
+              <td><%= @review.star %>点</td>
+          </tr>
+          <tr>
+            <td>タイトル</td>
+            <td colspan = "3"></td>
+            <td><%= @review.title %></td>
+          </tr>
+          <tr>
+            <td>購入時価格</td>
+            <td colspan = "3"></td>
+            <td><%= @review.item_price %></td>
+          </tr>
+          <tr>
+            <td style ="vertical-align: top;">本文</td>
+            <td colspan = "3"></td>
+            <td class ="text-wrap" style="width: 30rem;"><%= @review.impression %></td>
+          </tr>
+          <tr>
+            <td>
+              <%= link_to "編集する", edit_admin_item_post_review_path(@item_post.id, @review.id), class: "btn btn-success" %>
+            </td>
+          </tr>
+        </th>
+      </table>
+    </div>
+  </div>
+</div>

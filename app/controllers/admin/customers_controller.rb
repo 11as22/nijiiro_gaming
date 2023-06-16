@@ -10,7 +10,7 @@ class Admin::CustomersController < Admin::ApplicationController
   def edit
     @customer = Customer.find(params[:id])
   end
-  
+
   def update
     @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
@@ -21,10 +21,22 @@ class Admin::CustomersController < Admin::ApplicationController
       render :edit
     end
   end
-  
+
+  def reviews
+    @customer = Customer.find(params[:customer_id])
+    @reviews = @customer.reviews
+  end
+
+  def favorites
+    @customer = Customer.find(params[:id])
+    # ユーザーidが、このユーザーのいいねのレコードを全て取得。item_post_idも一緒に持ってくる。引数にその情報を入れると、favoritesの中身には、あるユーザーがいいねした商品投稿のid。
+    favorites = ItemFavorite.where(customer_id: @customer.id).pluck(:item_post_id)
+    @favorite_posts = ItemPost.find(favorites)
+  end
+
   private
 
   def customer_params
-      params.require(:customer).permit(:display_name, :email, :introduction, :profile_image, :member_status)
+      params.require(:customer).permit(:email, :display_name, :introduction, :profile_image, :item_favorites)
   end
 end

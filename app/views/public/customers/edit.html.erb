@@ -5,7 +5,7 @@
       <h1><%= @customer.display_name %>さんの会員情報編集ページ</h1>
       <%= image_tag @customer.get_profile_image(250,200), class: "large-image" %>
     </div>
-  
+
   <%= form_with model: @customer, metod: :patch, local: true do |f| %>
     <table class = "table">
       <th>

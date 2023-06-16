@@ -1,2 +1,23 @@
-<h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+<div class="container">
+  <div class = "offset-md-5">
+    <!--フラッシュ表示-->
+    <%= flash[:notice] %>
+  </div>
+  <div class="row d-flex align-items-center justify-content-center">
+    <div class="card text-white">
+      <img class="card-img" src="/assets/nijiiro_gaming_top.jpg" alt="">
+      <div class="card-img-overlay d-flex align-items-center justify-content-center">
+        <div class="top-message">
+          <h3 class= "stroke">
+            にじいろゲーミングへようこそ!<br>
+            ゲーミングデバイスのレビューサイトです。<br>
+            会員でない方も商品の閲覧はできます。<br>
+            aboutページでサイトの説明をご覧ください。<br>
+          </h3>
+          <h5>現在投稿されている商品投稿件数：<%= @item_post_count %>件</h5>
+          <h5>現在投稿されていレビュー件数：<%= @review_count %>件</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

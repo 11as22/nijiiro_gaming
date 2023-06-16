@@ -2,7 +2,7 @@
   <div class="row">
     <!--ジャンル検索画面-->
     <div class="col-md-2">
-      <%= render 'public/homes/genre', genres: @genres %>
+      <%= render 'admin/homes/genre', genres: @genres %>
     </div>
     <!--商品一覧画面-->
     <div class ="col-md-10">
@@ -15,7 +15,7 @@
       <% @item_posts.each do |item_post| %>
       <!--ここでdivとその背景色を作成する。-->
         <%= content_tag :div, class: "col-md-12", style: "background-color: #{colors.sample}" do %>
-          <%= link_to item_post_path(item_post.id), class: "text-decoration-none text-dark" do %>
+          <%= link_to admin_item_post_path(item_post.id), class: "text-decoration-none text-dark" do %>
             <div class = "row border border-dark mt-2 mb-1">
               <div class ="col-md-4 d-flex align-items-center">
                 <%= image_tag  item_post.get_item_image(150, 100), class: "small-image" %>
@@ -67,9 +67,3 @@
     </div>
   </div>
 </div>
-      <!--ページ選択-->
-      <!--<div class = "mx-auto">-->
-      <!--  <#= paginate @items %>-->
-      <!--</div>-->
-    </div>
-  </div>

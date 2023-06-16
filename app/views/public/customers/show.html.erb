@@ -1,14 +1,14 @@
 <div class = "container">
   <%= flash[:notice] %>
-  <div class ="row justify-content-md-center">
-    <div class ="col-md-auto">
+  <div class = "row justify-content-center">
+    <div class = "text-center">
       <h1><%= @customer.display_name %>さんのページ</h1>
       <%= image_tag @customer.get_profile_image(250,200), class: "large-image" %>
       <div>
         <%= link_to customer_followings_path(@customer), class: "btn btn-info" do %>
           フォロー<%= @customer.followings.count %>人
         <% end %>
-        <%= link_to customer_followers_path(@customer), class: " btn btn-info ml-5" do%>
+        <%= link_to customer_followers_path(@customer), class: "btn btn-info ml-5" do%>
           フォロワー<%= @customer.followers.count %>人
         <% end %>
       </div>
@@ -31,9 +31,11 @@
           <td><%= @customer.display_name %></td>
         </tr>
         <tr>
+          <td>メールアドレス</td>
           <% if @customer == current_customer %>
-            <td>メールアドレス</td>
             <td><%= @customer.email %></td>
+          <% else %>
+            <td>本人のみ表示</td>
           <% end %>
         </tr>
         <tr>
@@ -60,7 +62,7 @@
       </th>
     </table>
   </div>
-  <div class ="row justify-content-md-center">
+  <div class ="row justify-content-center">
     <table>
       <th>
         <tr>

@@ -1,13 +1,13 @@
 class ItemPost < ApplicationRecord
-  validates :item_name, presence: true, length: { in: 1..40}
-  validates :item_explanation, presence: true, length: { in: 1..150 }
+  validates :item_name, presence: true, length: { in: 1..50}
+  validates :item_explanation, presence: true, length: { in: 1..250}
   validates :model_number, length: {maximum: 30}
-  
+
   has_many :item_favorites, dependent: :destroy
   has_many :reviews, dependent: :destroy
   belongs_to :item_genre
   belongs_to :customer
-  
+
   has_one_attached :item_image
   # ------ソートの記述---------
   #レビューの平均評価値が高い順
@@ -16,7 +16,7 @@ class ItemPost < ApplicationRecord
   # レビューの多い順
   scope :review_count, -> { includes(:reviews).sort {|a,b| b.reviews.count <=> a.reviews.count }}
   # ----------------------------
-  
+
   def get_item_image(width, height)
     unless item_image.attached?
       file_path = Rails.root.join('app/assets/images/no_item_image.jpg')
@@ -24,10 +24,10 @@ class ItemPost < ApplicationRecord
     end
     item_image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
   def favorited?(customer)
     item_favorites.where(customer_id: customer.id).exists?
   end
-  
-  
+
+
 end

@@ -1,16 +1,25 @@
 <div class = "container">
   <%= flash[:notice] %>
-  <div class ="row justify-content-md-center">
-    <div class ="col-md-auto">
+  <div class = "row justify-content-center">
+    <div class =" text-center">
       <h1><%= @customer.display_name %>さんのページ</h1>
-      <%= image_tag @customer.get_profile_image(270,270) %>
+      <%= image_tag @customer.get_profile_image(250,200), class: "large-image" %>
+      <div>
+        <%= link_to admin_customer_followings_path(@customer), class: "btn btn-info" do %>
+          フォロー<%= @customer.followings.count %>人
+        <% end %>
+        <%= link_to admin_customer_followers_path(@customer), class: "btn btn-info ml-5" do%>
+          フォロワー<%= @customer.followers.count %>人
+        <% end %>
+      </div>
+      <div>
+      </div>
     </div>
   </div>
   <div class ="row">
-    <table class = "table">
+    <table class = "table table-borderless">
       <th>
         <tr>
-        <!--管理者側のみ表示-->
           <td>会員ID</td>
           <td><%= @customer.id %></td>
         </tr>
@@ -27,8 +36,38 @@
           <td><%= @customer.introduction %></td>
         </tr>
         <tr>
+          <td colspan = "2" class = "text-center">
+            <%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn-block btn-success" %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan = "1"></td>
+          <td>
+            <%= link_to favorites_admin_customer_path(@customer), class: "btn btn-outline-danger" do %>
+              いいねした商品一覧<i class =" fas fa-heart" style = "color: red"></i>
+            <% end %>
+          </td>
+        </tr>
+      </th>
+    </table>
+  </div>
+  <div class ="row justify-content-center">
+    <table>
+      <th>
+        <tr>
           <td></td>
-          <td><%= link_to "編集する",edit_admin_customer_path(@customer), class: "btn btn-success" %></td>
+          <!--商品投稿パスにcustomer_id に@customerの.idを渡す。-->
+          <td class = "col-md-6">
+            <%= link_to admin_item_posts_path(customer_id: @customer.id), class: "btn btn-outline-info" do %>
+              <%= @customer.display_name %>さんの商品投稿一覧<i class="fas fa-keyboard" style="color: #00eeff;"></i>
+            <% end %>
+          </td>
+          <!--URLに@customer.idをわたし、@customerのレビューを表示-->
+          <td class ="col-md-6">
+            <%= link_to "/admin/customer/#{@customer.id}/reviews", class: "btn btn-outline-warning" do %>
+              <%= @customer.display_name %>さんのレビュー投稿一覧<i class="fas fa-star" style="color: #ffdd00;"></i>
+            <% end %>
+          </td>
         </tr>
       </th>
     </table>
