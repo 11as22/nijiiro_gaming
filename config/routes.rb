@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'relationships/followings'
-    get 'relationships/followers'
-  end
+ 
 devise_for :customers, skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
@@ -18,22 +15,32 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
 
-
   # 管理者側のルーティング設定
   namespace :admin do
-    resources :item_posts, only:[:index, :show ,:edit, :update, :destroy]
-    resources :customers, only:[:index, :show, :edit, :update]
+    resources :item_posts, only:[:index, :show ,:edit, :update, :destroy] do
+      resources :reviews, only:[:index, :show, :edit, :update, :destroy]
+    end
+    
+     get 'customer/:customer_id/reviews' => 'customers#reviews'
+    resources :customers, only:[:index, :show, :edit, :update] do
+      member do
+        get :favorites
+      end
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
+    end
     resources :item_genres, only:[:index, :edit, :create, :update]
-    resources :reviews, only:[:index, :show, :edit, :update, :destroy]
-    resources :review_comments, only:[:index, :destroy]
+    
+    # resources :review_comments, only:[:index, :destroy]
     root to: 'homes#top'
     get '/about' =>'homes#about'
-    get "search" => "searches#search"
+    get '/genre/:id' =>'homes#index', as: 'index'
+    get "/search" => "searches#search"
   end
 
   scope module: :public do
     resources :item_posts, only:[:new, :create, :index, :show, :edit, :update, :destroy] do
-      resource :item_favorites, only: [:index, :create, :destroy]
+      resource :item_favorites, only: [:create, :destroy]
       resources :reviews, only:[:new, :create, :index, :show, :edit, :update, :destroy]
     end
 
@@ -48,7 +55,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
       get 'followers' => 'relationships#followers', as: 'followers'
     end
     
-    resources :review_comments, only:[:new, :create, :index, :destroy]
+    # resources :review_comments, only:[:new, :create, :index, :destroy]
     root to: 'homes#top'
     get '/about' =>'homes#about'
     get '/genre/:id' =>'homes#index', as: 'index'

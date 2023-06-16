@@ -17,7 +17,7 @@
                 <span>いいねをする<i class="far fa-heart fa-spin" style="color: #ff0000;"></i>︎</span>
               <% end %>
             <% end %>
-          <% end %>  
+          <% end %>
         </div>
       </div>
       <div class ="col-md-8">
@@ -60,7 +60,7 @@
      $(document).on('turbolinks:load', function() {
                     let elem = document.querySelector('#star_<%= @item_post.id %>');
                     if (elem == null) return;
-                  
+
                     elem.innerHTML = "";
                     let opt = {
                       starOn: "<%= asset_path('star-on.png') %>",
@@ -106,7 +106,7 @@
                       $(document).on('turbolinks:load', function() {
                         let elem = document.querySelector('#star_<%= review.id %>');
                         if (elem == null) return;
-                      
+
                         elem.innerHTML = "";
                         let opt = {
                           starOn: "<%= asset_path('star-on.png') %>",
