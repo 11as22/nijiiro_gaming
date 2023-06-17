@@ -1,51 +1,50 @@
 <div class = "container">
   <%= flash[:alert] %>
   <div class ="row justify-content-center">
-    <div class = "text-center">
+    <div class = "col-md-12 text-center">
       <h1><%= @customer.display_name %>さんの会員情報編集ページ</h1>
       <%= image_tag @customer.get_profile_image(250,200), class: "large-image" %>
     </div>
-  
-  <%= form_with model: @customer, metod: :patch, local: true do |f| %>
-    <table class = "table">
-      <th>
-        <tr>
-          <td>プロフィール画像</td>
-          <td>
-            <% f.label :profile_image %>
-            <%= f.file_field :profile_image, accept: "image/*" %>
-          </td>
-        </tr>
-        <tr>
-          <td>表示名(変更できません)</td>
-          <td>
-            <%= @customer.display_name %>
-          </td>
-        </tr>
-        <tr>
-          <td>メールアドレス</td>
-          <td>
-            <div class="field">
-              <% f.label :email %>
-              <%= f.email_field :email, placeholder: @customer.email %>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>自己紹介(30文字以内)</td>
-          <td>
-            <div class="field">
-              <% f.label :introduction %>
-              <%= f.text_area :introduction, placeholder: @customer.introduction %>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><%= f.submit '変更を保存', class: "btn btn-sm btn-success" %></td>
-        </tr>
-      </th>
-    </table>
-  <% end %>
-  </div>
+    <%= form_with url: admin_customer_path, model: @customer, metod: :patch, local: true do |f| %>
+      <table class = "table">
+        <th>
+          <tr>
+            <td>プロフィール画像</td>
+            <td>
+              <% f.label :profile_image %>
+              <%= f.file_field :profile_image, accept: "image/*" %>
+            </td>
+          </tr>
+          <tr>
+            <td>表示名(変更できません)</td>
+            <td>
+              <%= @customer.display_name %>
+            </td>
+          </tr>
+          <tr>
+            <td>メールアドレス</td>
+            <td>
+              <div class="field">
+                <% f.label :email %>
+                <%= f.email_field :email, placeholder: @customer.email %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>自己紹介(30文字以内)</td>
+            <td>
+              <div class="field">
+                <% f.label :introduction %>
+                <%= f.text_area :introduction, placeholder: @customer.introduction %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%= f.submit '変更を保存', class: "btn btn-sm btn-success" %></td>
+          </tr>
+        </th>
+      </table>
+    <% end %>
+　</div>
 </div>

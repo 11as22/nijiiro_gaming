@@ -108,6 +108,7 @@
                                     starHalf: "<%= asset_path('star-half.png') %>",
                                     half: true,
                                     readOnly: true,
+                                    //平均点を表示
                                     score: <%= item_post.reviews.average(:star).to_f.round(1) %>,
                                   };
                                   raty(elem, opt);
