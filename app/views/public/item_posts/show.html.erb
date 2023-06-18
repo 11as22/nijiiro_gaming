@@ -1,0 +1,149 @@
+<div class = "container">
+  <%= flash[:notice] %>
+  <div class = "mt-4 pl-2 border border-success">
+    <div class = "row">
+      <div class = "col-md-4 mt-4 ">
+        <%= image_tag  @item_post.get_item_image(250, 200), class: "large-image" %>
+        <div class ="row ml-3">
+          <% if customer_signed_in? %>
+            <% if @item_post.favorited?(current_customer) %>
+              <!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
+              <%= link_to  item_post_item_favorites_path(@item_post.id), method: :delete, class: "btn btn-danger" do %>
+                <span>いいねを外す<i class="fas fa-heart fa-spin" style="color: #ff0000;"></i>︎</span>
+              <% end %>
+            <% else %>
+             <!--一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
+              <%= link_to item_post_item_favorites_path(@item_post.id), method: :post, class: "btn-outline-danger" do %>
+                <span>いいねをする<i class="far fa-heart fa-spin" style="color: #ff0000;"></i>︎</span>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class ="col-md-8">
+        <table>
+          <th>
+            <tr>
+              <td class = "col-md-3"><h5>商品名</h5></td>
+              <td class = "col-md-5"><%= @item_post.item_name %></td>
+            </tr>
+            <tr>
+              <td class = "col-md-3"><h5>商品モデル番号</h5></td>
+              <td class = "col-md-5"><%= @item_post.model_number %></td>
+            </tr>
+            <tr>
+              <td class = "col-md-3"><h5>商品説明文</h5></td>
+              <td class = "col-md-5"><%= @item_post.item_explanation %></td>
+            </tr>
+          </th>
+        </table>
+      </div>
+    </div>
+    <div class = "row">
+      <div class ="col-md-4 text-center mt-2">
+        <!--現在のユーザーが商品投稿者であれば、編集ボタンを表示-->
+        <% if current_customer == @item_post.customer %>
+          <%= link_to "編集する",edit_item_post_path(@item_post), class: "btn-block btn-success" %>
+        <% end %>
+      </div>
+      <div class ="col-md-2"><h5>ジャンル:</h5></div>
+      <div class ="col-md-2"><%= @item_post.item_genre.genre %></div>
+      <div class ="col-md-2"><h5>投稿者:</h5></div>
+      <div class ="col-md-2"><%= @item_post.customer.display_name %></div>
+    </div>
+  </div>
+  <!--商品に対しての平均点表示-->
+  <div class ="row justify-content-center border border-danger mt-3">
+    <h4 class ="mr-2">平均評価</h4>
+    <div id="star_<%= @item_post.id %>"></div>
+    <script>
+     $(document).on('turbolinks:load', function() {
+                    let elem = document.querySelector('#star_<%= @item_post.id %>');
+                    if (elem == null) return;
+
+                    elem.innerHTML = "";
+                    let opt = {
+                      starOn: "<%= asset_path('star-on.png') %>",
+                      starOff: "<%= asset_path('star-off.png') %>",
+                      starHalf: "<%= asset_path('star-half.png') %>",
+                      half: true,
+                      readOnly: true,
+                      score: <%= @item_post.reviews.average(:star).to_f.round(1) %>,
+                    };
+                    raty(elem, opt);
+                  });
+      </script>
+      <h4><%= @item_post.reviews.average(:star).to_f.round(1) %>点</h4>
+      <p>(レビュー<%= @item_post.reviews.count %>件)</p>
+    </div>
+  <div class ="row justify-content-center">
+    <div class ="col-3 text-center mt-2">
+      <%= link_to "この商品のレビューを書く", new_item_post_review_path(@item_post), class: "btn-block btn-primary"%>
+    </div>
+  </div>
+  <!--ランダムでアイテム一覧の背景色を変える-->
+  <% colors = %w|#6DFF8D50 #5EECF050 #E6E15050 #FFC77750 #CEA1FF50 #FFA1FD50 #0107FF50| %>
+  <% @reviews.each do |review| %>
+    <!--ここでdivとその背景色を作成する。-->
+    <%= content_tag :div, class: "col-md-12", style: "background-color: #{colors.sample}" do %>
+      <div class = "row border border-dark mt-2 mb-1">
+        <div class ="col-md-3">
+          <%= link_to customer_path(review.customer_id) do %>
+            <%= image_tag  review.customer.get_profile_image(150, 100), class: "small-image" %><br/>
+            投稿者名:<%= review.customer.display_name %>
+          <% end %>
+        </div>
+        <%= link_to item_post_review_path(@item_post.id, review.id) do %>
+          <div class "col-md-9">
+            <table>
+              <th>
+                <tr>
+                  <td>評価</td>
+                  <td colspan = "3">
+                  <td>
+                    <div id="star_<%= review.id %>"></div>
+                    <script>
+                      $(document).on('turbolinks:load', function() {
+                        let elem = document.querySelector('#star_<%= review.id %>');
+                        if (elem == null) return;
+
+                        elem.innerHTML = "";
+                        let opt = {
+                          starOn: "<%= asset_path('star-on.png') %>",
+                          starOff: "<%= asset_path('star-off.png') %>",
+                          starHalf: "<%= asset_path('star-half.png') %>",
+                          score: "<%= review.star %>",
+                          readOnly: true,
+                        };
+                        raty(elem, opt);
+                      });
+                    </script>
+                  </td>
+                  <td>
+                    <%= review.star %>点
+                  </td>
+                </tr>
+                <tr>
+                  <td>タイトル</td>
+                  <td colspan = "3"></td>
+                  <td><%= review.title %></td>
+                </tr>
+                <tr>
+                  <td>購入時価格</td>
+                  <td colspan = "3"></td>
+                  <td><%= review.item_price %></td>
+                </tr>
+                <tr>
+                  <td>本文</td>
+                  <td colspan = "3"></td>
+                  <!--表示する本文を10文字に設定-->
+                  <td><%= review.impression.truncate(10) %></td>
+                </tr>
+              </th>
+            </table>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

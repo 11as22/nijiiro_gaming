@@ -1,0 +1,86 @@
+<div class = "container">
+  <%= flash[:notice] %>
+  <div class = "row justify-content-center">
+    <div class = "text-center">
+      <h1><%= @customer.display_name %>さんのページ</h1>
+      <%= image_tag @customer.get_profile_image(250,200), class: "large-image" %>
+      <div>
+        <%= link_to customer_followings_path(@customer), class: "btn btn-info" do %>
+          フォロー<%= @customer.followings.count %>人
+        <% end %>
+        <%= link_to customer_followers_path(@customer), class: "btn btn-info ml-5" do%>
+          フォロワー<%= @customer.followers.count %>人
+        <% end %>
+      </div>
+      <div>
+        <% if current_customer != @customer %>
+          <% if current_customer.following?(@customer) %>
+            <%= link_to "フォロー外す", customer_relationships_path(@customer.id), method: :delete, class: "btn btn-block btn-danger" %>
+          <% else %>
+            <%= link_to "フォローする", customer_relationships_path(@customer.id), method: :post, class: "btn btn-block btn-success" %>
+          <% end %>
+        <% end %>
+    </div>
+    </div>
+  </div>
+  <div class ="row">
+    <table class = "table table-borderless">
+      <th>
+        <tr>
+          <td>表示名</td>
+          <td><%= @customer.display_name %></td>
+        </tr>
+        <tr>
+          <td>メールアドレス</td>
+          <% if @customer == current_customer %>
+            <td><%= @customer.email %></td>
+          <% else %>
+            <td>本人のみ表示</td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>自己紹介</td>
+          <td><%= @customer.introduction %></td>
+        </tr>
+        <tr>
+          <td colspan = "2" class = "text-center">
+            <% if @customer == current_customer %>
+              <%= link_to "編集する",edit_customer_path(@customer), class: "btn-block btn-success" %>
+            <% end %>
+          </td>
+        </tr>
+        <% if @customer == current_customer %>
+          <tr>
+            <td colspan = "1"></td>
+            <td>
+              <%= link_to favorites_customer_path(@customer), class: "btn btn-outline-danger" do %>
+                いいねした商品一覧<i class =" fas fa-heart" style = "color: red"></i>
+              <% end %>   
+            </td>
+          </tr>
+        <% end %>
+      </th>
+    </table>
+  </div>
+  <div class ="row justify-content-center">
+    <table>
+      <th>
+        <tr>
+          <td></td>
+          <!--商品投稿パスにcustomer_id に@customerの.idを渡す。-->
+          <td class = "col-md-6">
+            <%= link_to item_posts_path(customer_id: @customer.id), class: "btn btn-outline-info" do %>
+              <%= @customer.display_name %>さんの商品投稿一覧<i class="fas fa-keyboard" style="color: #00eeff;"></i>
+            <% end %>
+          </td>
+          <!--ヘルパーがないので、URLに@customer.idをわたし、@customerのレビューを表示-->
+          <td class ="col-md-6">
+            <%= link_to "/customer/#{@customer.id}/reviews", class: "btn btn-outline-warning" do %>
+              <%= @customer.display_name %>さんのレビュー投稿一覧<i class="fas fa-star" style="color: #ffdd00;"></i>
+            <% end %>
+          </td>
+        </tr>
+      </th>
+    </table>
+  </div>
+</div>

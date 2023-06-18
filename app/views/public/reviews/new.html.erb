@@ -1,0 +1,99 @@
+<div class = "container">
+  <h1>レビュー投稿画面</h1>
+  <%= flash[:notice] %>
+  <div class =" mt-4 border border-success">
+    <div class = "row">
+      <div class = "col-md-4 mt-4">
+        <%= image_tag  @item_post.get_item_image(250, 200), class: "large-image" %>
+      </div>
+      <div class ="col-md-8">
+        <table>
+          <th>
+            <tr>
+              <td class = "col-md-3"><h5>商品名</h5></td>
+              <td class = "col-md-5"><%= @item_post.item_name %></td>
+            </tr>
+            <tr>
+              <td class = "col-md-3"><h5>商品モデル番号</h5></td>
+              <td class = "col-md-5"><%= @item_post.model_number %></td>
+            </tr>
+            <tr>
+              <td class = "col-md-3"><h5>商品説明文</h5></td>
+              <td class = "col-md-5"><%= @item_post.item_explanation %></td>
+            </tr>
+          </th>
+        </table>
+      </div>
+    </div>
+    <div class = "row">
+      <div class ="col-md-2 offset-md-4"><h4>ジャンル:</h4></div>
+      <div class ="col-md-2"><%= @item_post.item_genre.genre %></div>
+      <div class ="col-md-2"><h4>投稿者:</h4></div>
+      <div class ="col-md-2"><%= @item_post.customer.display_name %></div>
+    </div>
+  </div>
+</div>
+
+<div class = "container">
+  <div class ="row mt-4">
+    <%= form_with model: [@item_post, @review], local: true do |f| %>
+    <div class ="row">
+      <p class="ml-3">評価</p>
+      <!--raty使用-->
+      <div class="form-group ml-3" id="star">
+        <% f.label :star %>
+        <%= f.hidden_field :star, id: :review_star, class: 'form-control' %>
+        <div id="post_raty"></div>
+        </div>
+          <script>
+            $(document).on('turbolinks:load', function() {
+              let elem = document.querySelector('#post_raty');
+              if (elem == null) return;
+        
+              elem.innerHTML = ""
+              let opt = {  
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                starHalf: "<%= asset_path('star-half.png') %>",
+                score : 3,
+                half: true,
+                scoreName: 'review[star]',
+              };
+              raty(elem, opt);
+            });
+          </script>
+      </div>
+      <table>
+        <th>
+          <tr>
+            <td>レビュータイトル</td>
+            <td>
+              <% f.label :title %>
+              <%= f.text_field :title, placeholder: "20文字以内" %>
+            </td>
+          </tr>
+          <tr>
+            <td>レビュー内容</td>
+            <td>
+              <% f.label :impression %>
+              <%= f.text_area :impression, placeholder: "150文字以内", size: "50x5" %>
+            </td>
+          </tr>
+          <tr>
+            <td>購入時価格</td>
+            <td>
+              <% f.label :item_price %>
+              <%= f.text_field :item_price, placeholder: "15文字以内" %>
+            </td>
+          </tr>
+        </th>
+      </table>
+      <div class="form-group mt-2">
+        <td></td>
+        <td>
+          <%= f.submit 'レビューを投稿する', class: "btn-block btn-sm btn-success" %>
+        </td>
+      </div>
+    <% end %>
+  </div>
+</div>
