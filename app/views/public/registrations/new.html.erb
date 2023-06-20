@@ -1,6 +1,6 @@
-<!--フラッシュ表示-->
-<%= flash[:notice] %>
 <div class=container>
+  <!--フラッシュ表示-->
+  <%= flash[:notice] %>
   <%= form_with model: resource, url: customer_registration_path, id: 'new_public', class: 'new_public' do |f| %>
     <%= render "public/shared/error_messages", resource: resource %>
   <h2>新規会員登録</h2>
@@ -12,7 +12,7 @@
         <td>
           <div class="field">
             <% f.label :display_name %>
-            <%= f.text_field :display_name, autofocus: true, placeholder: "半角英数のみ,15文字以内", size:60 %>
+            <%= f.text_field :display_name, autofocus: true, placeholder: "半角英数のみ,15文字以内", required: true, size:60 %>
           </div>
         </td>
       </tr>
@@ -22,7 +22,7 @@
         <td>
           <div class="field">
             <% f.label :email %>
-            <%= f.email_field :email, placeholder: "sample@example.com", size:60 %>
+            <%= f.email_field :email, placeholder: "sample@example.com", required: true, size:60 %>
           </div>
         </td>
       </tr>
@@ -32,7 +32,7 @@
         <td>
           <div class="field">
             <% f.label :password %>
-            <%= f.password_field :password, autocomplete: "new-password", size:60 %>
+            <%= f.password_field :password, autocomplete: "new-password", required: true, size:60 %>
           </div>
         </td>
       </tr>
@@ -42,7 +42,7 @@
         <td>
           <div class="field">
             <% f.label :password_confirmation %>
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", size:60 %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, size:60 %>
           </div>
         </td>
       </tr>

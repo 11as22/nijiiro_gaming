@@ -1,4 +1,6 @@
 <div class=container>
+  <!--フラッシュ表示-->
+  <%= flash[:notice] %>
   <div class="ml-5 pl-5 mt-2 mb-2">
   <h2>管理者ログイン</h2>
   <%= form_with model: resource, url: new_admin_session_path, id: 'new_session_public', class: 'new_session_public' do |f| %>

@@ -24,6 +24,16 @@
           <td><%= @customer.id %></td>
         </tr>
         <tr>
+          <td>ステータス</td>
+          <td>
+            <% if @customer.member_status == "exist" %>
+              <p style = "color: #4ec51e;">有効</p>
+            <% else %>
+              <p style = "color: #ff3838;">退会</p>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
           <td>表示名</td>
           <td><%= @customer.display_name %></td>
         </tr>
