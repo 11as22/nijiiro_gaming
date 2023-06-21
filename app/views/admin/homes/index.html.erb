@@ -34,10 +34,10 @@
                     <tr>
                       <td class ="col-md-2"><h5>平均評価</h5></td>
                       <td class ="col-md-3">
-                        <div id="star_<%= item_post.id %>"></div>
+                        <div id = "average_star_<%= item_post.id %>"></div>
                           <script>
                              $(document).on('turbolinks:load', function() {
-                                let elem = document.querySelector('#star_<%= item_post.id %>');
+                                let elem = document.querySelector('#average_star_<%= item_post.id %>');
                                 if (elem == null) return;
 
                                 elem.innerHTML = "";

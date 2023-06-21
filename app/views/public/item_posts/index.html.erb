@@ -20,8 +20,9 @@
       <% @item_posts.each do |item_post| %>
         <!--ここでdivとその背景色を作成する。-->
         <%= content_tag :div, class: "col-md-12", style: "background-color: #{colors.sample}" do %>
-          <%= link_to item_post_path(item_post.id), class: "text-decoration-none text-dark" do %>
+          <%= link_to item_post_path(item_post.id), class: "item_post_box text-decoration-none text-dark" do %>
             <div class = "row border border-success mt-2 mb-1">
+              <div class = "item_post_genre_<%= item_post.item_genre.id %>"><%= item_post.item_genre.genre %></div>
               <div class ="col-md-4 d-flex align-items-center">
                 <%= image_tag  item_post.get_item_image(150, 100), class: "small-image" %>
               </div>
@@ -39,12 +40,12 @@
                     <tr>
                       <td class ="col-md-2"><h5>平均評価</h5></td>
                       <td class ="col-md-3">
-                        <div id="star_<%= item_post.id %>"></div>
+                        <div id = "average_star_<%= item_post.id %>"></div>
                           <script>
                              $(document).on('turbolinks:load', function() {
-                                let elem = document.querySelector('#star_<%= item_post.id %>');
+                                let elem = document.querySelector('#average_star_<%= item_post.id %>');
                                 if (elem == null) return;
-  
+
                                 elem.innerHTML = "";
                                 let opt = {
                                   starOn: "<%= asset_path('star-on.png') %>",

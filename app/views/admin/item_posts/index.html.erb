@@ -22,6 +22,7 @@
         <%= content_tag :div, class: "col-md-12", style: "background-color: #{colors.sample}" do %>
           <%= link_to admin_item_post_path(item_post.id), class: "text-decoration-none text-dark" do %>
             <div class = "row border border-success mt-2 mb-1">
+              
               <div class ="col-md-4 d-flex align-items-center">
                 <%= image_tag item_post.get_item_image(150, 100), class: "small-image" %>
               </div>
@@ -39,10 +40,10 @@
                     <tr>
                       <td class ="col-md-2"><h5>平均評価</h5></td>
                       <td class ="col-md-3">
-                        <div id="star_<%= item_post.id %>"></div>
+                        <div id="#average_star_<%= item_post.id %>"></div>
                           <script>
                              $(document).on('turbolinks:load', function() {
-                                let elem = document.querySelector('#star_<%= item_post.id %>');
+                                let elem = document.querySelector('#average_star_<%= item_post.id %>');
                                 if (elem == null) return;
 
                                 elem.innerHTML = "";
