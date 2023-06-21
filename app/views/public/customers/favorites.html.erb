@@ -4,7 +4,7 @@
     <!--商品一覧画面-->
     <div class ="col-md-10">
       <div class ="row ml-2">
-        <p>いいね商品投稿一覧(全<%= @favorite_posts.count %>件)</p>
+        <p>いいね商品投稿一覧(全<%= @favorite_posts_count %>件)</p>
       </div>
         <%= render 'public/item_posts/item_post_index', item_posts: @favorite_posts %>
     </div>

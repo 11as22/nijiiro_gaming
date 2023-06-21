@@ -8,7 +8,7 @@
     <div class ="col-md-10">
       <h2><%= @genre.genre %>の検索結果</h2>
       <div class ="row ml-2">
-        <p>ジャンル:<%= @genre.genre %>(全<%= @item_posts.count %>件)</p>
+        <p>ジャンル:<%= @genre.genre %>(全<%= @item_posts_count %>件)</p>
       </div>
       <%= render 'admin/item_posts/item_post_index', item_posts: @item_posts %>
     </div>

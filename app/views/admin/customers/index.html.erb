@@ -1,34 +1,10 @@
 <div class="container">
   <div class ="row">
     <h1 class ="offset-md-1">会員一覧</h1>
-    <p class ="ml-3 mt-2">(全<%= @customers.count %>件)</p>
+    <p class ="ml-3 mt-2">(全<%= @customers_count %>件)</p>
     <div class ="offset-md-2">
       <%= render 'admin/searches/customer_search' %>
     </div>
-  <table class ="table">
-    <tr>
-      <td>会員ID</td>
-      <td>プロフィール画像</td>
-      <td>表示名</td>
-      <td>メールアドレス</td>
-      <td>ステータス</td>
-    </tr>
-    <% @customers.each do |customer| %>
-    <tr>
-      <td><%= customer.id %></td>
-      <td><%= link_to admin_customer_path(customer) do %><%= image_tag customer.get_profile_image(90,90) %><% end %></td>
-      <td><%= link_to admin_customer_path(customer) do %><%= customer.display_name %><% end %></td>
-      <td><%= customer.email %></td>
-      <!--会員ステータスを表示するための記述-->
-      <td>
-        <% if customer.member_status == "exist" %>
-          <p style = "color: #4ec51e;">有効</p>
-        <% else %>
-          <p style = "color: #ff3838;">退会</p>
-        <% end %>
-      </td>
-    </tr>
-    <% end %>
-  </table>
+    <%= render 'admin/customers/customer_index', customers: @customers %>
   </div>
 </div>

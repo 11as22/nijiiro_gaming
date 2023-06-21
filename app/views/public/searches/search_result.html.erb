@@ -4,7 +4,7 @@
       <div class ="col-md-10">
         <div class ="row ml-2">
           <h3>【商品モデル番号】：<%= @content %>  の検索結果</h3>
-          <p class ="offset-md-1">商品投稿一覧(全<%= @records.count %>件)</p>
+          <p class ="offset-md-1">商品投稿一覧(全<%= @records_count %>件)</p>
         </div>
           <%= render 'public/item_posts/item_post_index', item_posts: @records %>
       </div>
@@ -16,7 +16,7 @@
       <div class ="col-md-10">
         <div class ="row ml-2">
           <h3>【商品名】：<%= @content %>  の検索結果</h3>
-          <p class ="offset-md-1">商品投稿一覧(全<%= @records.count %>件)</p>
+          <p class ="offset-md-1">商品投稿一覧(全<%= @records_count %>件)</p>
         </div>
         <%= render 'public/item_posts/item_post_index', item_posts: @records %>
       </div>
