@@ -39,7 +39,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   end
 
   scope module: :public do
-    resources :item_posts, only:[:new, :create, :show, :edit, :update, :destroy] do
+    resources :item_posts, only:[:new, :create, :index, :show, :edit, :update, :destroy] do
       resource :item_favorites, only: [:create, :destroy]
       resources :reviews, only:[:new, :create, :show, :edit, :update, :destroy]
     end
