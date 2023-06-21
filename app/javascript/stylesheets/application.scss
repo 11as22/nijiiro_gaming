@@ -37,20 +37,36 @@
   100% { background-color: Magenta; }
 }
   
-.footer_text{
+.title_logo{
   background: linear-gradient(to right,#e60000,#f39800,#fff100,#009944,#0068b7,#1d2088,#920783) 0 / 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bold;
   font-size: 100%;
   display: inline-block;
-  animation: 5s footer_text linear infinite;
+  animation: 5s title_logo linear infinite;
+  margin-left: 13%;
 }
 
-@keyframes footer_text{
+@keyframes title_logo{
     100% { background-position: 200%; }
 }
-  
+
+.footer_text {
+  /* アニメーションの長さ */
+  animation: footer_text 2s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes footer_text {
+  /* 色の指定 */
+  0% { background-color: Magenta; }
+  33% { background-color: yellow; }
+  66% { background-color: Cyan; }
+  100% { background-color: Magenta; }
+}
+
 .item_post_box{
   position: relative;
 }
