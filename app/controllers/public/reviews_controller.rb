@@ -38,7 +38,7 @@ class Public::ReviewsController < ApplicationController
     @item_post = ItemPost.find(params[:item_post_id])
     @review = Review.find(params[:id])
   end
-  
+
   def update
     @item_post = ItemPost.find(params[:item_post_id])
     @review = Review.find(params[:id])
@@ -52,14 +52,14 @@ class Public::ReviewsController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     item_post = ItemPost.find(params[:item_post_id])
     review = Review.find(params[:id])
     review.destroy
     redirect_to item_post_path(item_post)
   end
-  
+
   private
   def correct_customer
     @item_post = ItemPost.find(params[:item_post_id])

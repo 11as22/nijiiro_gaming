@@ -9,7 +9,9 @@ class Admin::SearchesController < Admin::ApplicationController
     @content = params["content"]
     # @model, @content, @methodを代入した、
     # search_forを@recordsに代入。
-    @records = search_for(@column, @content, @method)
+    records = search_for(@column, @content, @method)
+    @records = Kaminari.paginate_array(records).page(params[:page])
+    @records_count = records.count
     render "admin/searches/search_result"
   end
 

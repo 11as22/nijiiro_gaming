@@ -29,14 +29,17 @@ class Public::CustomersController < ApplicationController
 
   def reviews
     @customer = Customer.find(params[:customer_id])
-    @reviews = @customer.reviews
+    reviews = @customer.reviews
+    @reviews = Kaminari.paginate_array(reviews).page(params[:page])
   end
   
   def favorites
     @customer = Customer.find(params[:id])
-    # カスタマーidが、このカスタマーのいいねのレコードを全て取得。item_post_idも一緒に持ってくる。引数にその情報を入れると、favoritesの中身には、あるカスタマーがいいねした商品投稿のid。
+    # ユーザーidが、このユーザーのいいねのレコードを全て取得。item_post_idも一緒に持ってくる。引数にその情報を入れると、favoritesの中身には、あるユーザーがいいねした商品投稿のid。
     favorites = ItemFavorite.where(customer_id: @customer.id).pluck(:item_post_id)
-    @favorite_posts = ItemPost.find(favorites)
+    favorite_posts = ItemPost.find(favorites)
+    @favorite_posts =  Kaminari.paginate_array(favorite_posts).page(params[:page])
+    @favorite_posts_count = favorite_posts.count
   end
 
 

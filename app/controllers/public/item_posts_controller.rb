@@ -25,20 +25,24 @@ class Public::ItemPostsController < ApplicationController
   def index
     #もしurlにcustomer_idを含んでいたら、その人のitem_postsを取得するコントローラー
     if params[:customer_id].present?
-      @item_posts = ItemPost.where(customer_id: params[:customer_id])
-      @item_post_count = @item_posts.count
+      item_posts = ItemPost.where(customer_id: params[:customer_id])
+      @item_posts =  Kaminari.paginate_array(item_posts).page(params[:page])
+      @item_post_count = item_posts.count
     else
       if params[:review_count]
-        @item_posts = ItemPost.review_count
-        @item_post_count = @item_posts.count
+        item_posts = ItemPost.review_count
+        @item_posts =  Kaminari.paginate_array(item_posts).page(params[:page])
+        @item_post_count = ItemPost.includes(:item_name).count
       elsif params[:review_rate]
-        @item_posts = ItemPost.review_rate
+        item_posts = ItemPost.review_rate
+        @item_posts =  Kaminari.paginate_array(item_posts).page(params[:page])
         @item_post_count = ItemPost.includes(:item_name).count
       else
         # ------全てのif文に@item_posts_countで商品表示件数を表示することで、ソート順にした時に内部データが出ないようにする----------
         # ヘッダーからリンクを踏んだ時に最初に、モデルからアイテム件数を取得
         @item_post_count = ItemPost.includes(:item_name).count
-        @item_posts = ItemPost.all
+        @item_posts = ItemPost.page(params[:page])
+        
       end
     end
     @genres = ItemGenre.all
@@ -46,7 +50,8 @@ class Public::ItemPostsController < ApplicationController
 
   def show
     @item_post = ItemPost.find(params[:id])
-    @reviews = @item_post.reviews.all
+    reviews = @item_post.reviews.all
+    @reviews = Kaminari.paginate_array(reviews).page(params[:page])
   end
 
   def edit
