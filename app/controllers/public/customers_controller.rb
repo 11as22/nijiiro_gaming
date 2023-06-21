@@ -3,10 +3,6 @@ class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
    # 他のカスタマーが自分に対して行えないアクション
   before_action :correct_customer, only: [:edit, :update, :destroy, :favorites]
-  def index
-    @customer = Customer.find(params[:id]) 
-    @item_posts = @customer.item_posts.all
-  end
   def show
     @customer = Customer.find(params[:id])
   end

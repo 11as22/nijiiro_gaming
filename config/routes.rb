@@ -18,7 +18,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   # 管理者側のルーティング設定
   namespace :admin do
     resources :item_posts, only:[:index, :show ,:edit, :update, :destroy] do
-      resources :reviews, only:[:index, :show, :edit, :update, :destroy]
+      resources :reviews, only:[:show, :edit, :update, :destroy]
     end
     
      get 'customer/:customer_id/reviews' => 'customers#reviews'
@@ -39,14 +39,14 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   end
 
   scope module: :public do
-    resources :item_posts, only:[:new, :create, :index, :show, :edit, :update, :destroy] do
+    resources :item_posts, only:[:new, :create, :show, :edit, :update, :destroy] do
       resource :item_favorites, only: [:create, :destroy]
-      resources :reviews, only:[:new, :create, :index, :show, :edit, :update, :destroy]
+      resources :reviews, only:[:new, :create, :show, :edit, :update, :destroy]
     end
 
     get '/customer/:customer_id/reviews' => 'customers#reviews'
 
-    resources :customers, only:[:index,:show, :edit, :update] do
+    resources :customers, only:[:show, :edit, :update] do
       member do
         get :favorites
       end
