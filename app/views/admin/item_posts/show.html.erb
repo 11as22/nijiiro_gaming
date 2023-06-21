@@ -39,10 +39,10 @@
   <!--商品に対しての平均点表示-->
   <div class ="row justify-content-center border border-danger mt-3">
     <h4 class ="mr-2">平均評価</h4>
-    <div id="star_<%= @item_post.id %>"></div>
+    <div id = "average_star_<%= @item_post.id %>"></div>
     <script>
      $(document).on('turbolinks:load', function() {
-                    let elem = document.querySelector('#star_<%= @item_post.id %>');
+                    let elem = document.querySelector('#average_star_<%= @item_post.id %>');
                     if (elem == null) return;
 
                     elem.innerHTML = "";
@@ -64,69 +64,5 @@
     <div class ="col-3 text-center mt-2">
     </div>
   </div>
-  <!--ランダムでアイテム一覧の背景色を変える-->
-  <% colors = %w|#6DFF8D50 #5EECF050 #E6E15050 #FFC77750 #CEA1FF50 #FFA1FD50 #0107FF50| %>
-  <% @reviews.each do |review| %>
-    <!--ここでdivとその背景色を作成する。-->
-    <%= content_tag :div, class: "col-md-12", style: "background-color: #{colors.sample}" do %>
-      <div class = "row border border-dark mt-2 mb-1">
-        <div class ="col-md-3">
-          <%= link_to admin_customer_path(review.customer_id) do %>
-            <%= image_tag  review.customer.get_profile_image(150, 100), class: "small-image" %><br/>
-            投稿者名:<%= review.customer.display_name %>
-          <% end %>
-        </div>
-        <%= link_to admin_item_post_review_path(@item_post.id, review.id) do %>
-          <div class "col-md-9">
-            <table>
-              <th>
-                <tr>
-                  <td>評価</td>
-                  <td colspan = "3">
-                  <td>
-                    <div id="star_<%= review.id %>"></div>
-                    <script>
-                      $(document).on('turbolinks:load', function() {
-                        let elem = document.querySelector('#star_<%= review.id %>');
-                        if (elem == null) return;
-
-                        elem.innerHTML = "";
-                        let opt = {
-                          starOn: "<%= asset_path('star-on.png') %>",
-                          starOff: "<%= asset_path('star-off.png') %>",
-                          starHalf: "<%= asset_path('star-half.png') %>",
-                          score: "<%= review.star %>",
-                          readOnly: true,
-                        };
-                        raty(elem, opt);
-                      });
-                    </script>
-                  </td>
-                  <td>
-                    <%= review.star %>点
-                  </td>
-                </tr>
-                <tr>
-                  <td>タイトル</td>
-                  <td colspan = "3"></td>
-                  <td><%= review.title %></td>
-                </tr>
-                <tr>
-                  <td>購入時価格</td>
-                  <td colspan = "3"></td>
-                  <td><%= review.item_price %></td>
-                </tr>
-                <tr>
-                  <td>本文</td>
-                  <td colspan = "3"></td>
-                  <!--表示する本文を10文字に設定-->
-                  <td><%= review.impression.truncate(10) %></td>
-                </tr>
-              </th>
-            </table>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-  <% end %>
+  <%= render 'admin/item_posts/review_index', reviews: @reviews %>
 </div>

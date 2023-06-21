@@ -16,18 +16,71 @@
   height: 100px;
 }
 
+.card-img{
+  width: 600px;
+  height: 380px;
+}
+
 .gaming {
-    /* アニメーションの長さ */
-    animation: gaming 2s linear infinite;
-    position: absolute;
-    top: 15px;
-    margin-left: 1px;
-  }
-  @keyframes gaming {
-    /* 色の指定 */
-    0% { background-color: Magenta; }
-    33% { background-color: yellow; }
-    66% { background-color: Cyan; }
-    100% { background-color: Magenta; }
-    
-  }
+  /* アニメーションの長さ */
+  animation: gaming 2s linear infinite;
+  position: absolute;
+  top: 15px;
+  margin-left: 1px;
+}
+
+@keyframes gaming {
+  /* 色の指定 */
+  0% { background-color: Magenta; }
+  33% { background-color: yellow; }
+  66% { background-color: Cyan; }
+  100% { background-color: Magenta; }
+}
+  
+.title_logo{
+  background: linear-gradient(to right,#e60000,#f39800,#fff100,#009944,#0068b7,#1d2088,#920783) 0 / 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  font-size: 100%;
+  display: inline-block;
+  animation: 5s title_logo linear infinite;
+  margin-left: 13%;
+}
+
+@keyframes title_logo{
+    100% { background-position: 200%; }
+}
+
+.footer_text {
+  /* アニメーションの長さ */
+  animation: footer_text 2s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes footer_text {
+  /* 色の指定 */
+  0% { background-color: Magenta; }
+  33% { background-color: yellow; }
+  66% { background-color: Cyan; }
+  100% { background-color: Magenta; }
+}
+
+.item_post_box{
+  position: relative;
+}
+  
+// 先頭にitem_post_genre_とつくクラス名を指定
+div[class^="item_post_genre_"]{
+  z-index: 1;
+  position: absolute;
+  top: 0px;
+  right: -30px;
+  border: 2px solid;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  background: #f1f1f1;
+}
+  
+  

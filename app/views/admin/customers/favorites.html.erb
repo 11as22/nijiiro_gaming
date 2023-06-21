@@ -6,58 +6,7 @@
       <div class ="row ml-2">
         <p>いいね商品投稿一覧(全<%= @favorite_posts.count %>件)</p>
       </div>
-      <!--ランダムでアイテム一覧の背景色を変える-->
-      <% colors = %w|#6DFF8D50 #5EECF050 #E6E15050 #FFC77750 #CEA1FF50 #FFA1FD50 #0107FF50| %>
-      <% @favorite_posts.each do |item_post|%>
-        <!--ここでdivとその背景色を作成する。-->
-        <%= content_tag :div, class: "col-md-12", style: "background-color: #{colors.sample}" do %>
-          <%= link_to admin_item_post_path(item_post.id), class: "text-decoration-none text-dark" do %>
-            <div class = "row border border-success mt-2 mb-1">
-              <div class ="col-md-4 d-flex align-items-center">
-                <%= image_tag  item_post.get_item_image(150, 100), class: "small-image" %>
-              </div>
-              <div class = "col-md-8 ">
-                <table>
-                  <th>
-                    <tr>
-                      <td class ="col-md-4"><h5>商品名</h5></td>
-                      <td class = col-md-4><%= item_post.item_name %></td>
-                    </tr>
-                    <tr>
-                      <td class ="col-md-4"><h5>ジャンル</h5></td>
-                      <td class ="col-md-4"><%= item_post.item_genre.genre %></td>
-                    </tr>
-                    <tr>
-                      <td class ="col-md-2"><h5>平均評価</h5></td>
-                      <td class ="col-md-3">
-                        <div id="star_<%= item_post.id %>"></div>
-                          <script>
-                             $(document).on('turbolinks:load', function() {
-                                let elem = document.querySelector('#star_<%= item_post.id %>');
-                                if (elem == null) return;
-  
-                                elem.innerHTML = "";
-                                let opt = {
-                                  starOn: "<%= asset_path('star-on.png') %>",
-                                  starOff: "<%= asset_path('star-off.png') %>",
-                                  starHalf: "<%= asset_path('star-half.png') %>",
-                                  half: true,
-                                  readOnly: true,
-                                  score: <%= item_post.reviews.average(:star).to_f.round(1) %>,
-                                };
-                                raty(elem, opt);
-                              });
-                          </script>
-                      </td>
-                      <td class ="col-md-3"><small><%= item_post.reviews.average(:star).to_f.round(1) %>点(レビュー<%= item_post.reviews.count %>件)</small></td>
-                    </tr>
-                  </th>
-                </table>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
-      <% end %>
+        <%= render 'admin/item_posts/item_post_index', item_posts: @favorite_posts %>
     </div>
   </div>
 </div>

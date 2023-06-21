@@ -69,14 +69,14 @@
             <td>レビュータイトル</td>
             <td>
               <% f.label :title %>
-              <%= f.text_field :title, placeholder: "20文字以内" %>
+              <%= f.text_field :title, placeholder: "20文字以内", required: true %>
             </td>
           </tr>
           <tr>
             <td>レビュー内容</td>
             <td>
               <% f.label :impression %>
-              <%= f.text_area :impression, placeholder: "150文字以内", size: "50x5" %>
+              <%= f.text_area :impression, placeholder: "150文字以内", size: "50x5", required: true %>
             </td>
           </tr>
           <tr>

@@ -59,4 +59,12 @@ ja:
       not_locked: 'は凍結されていません。'
       not_saved:
         one: "エラーが発生したため %{resource} は保存されませんでした:"
-        other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした:"
+        other: "%{count} 件のエラーが発生したため保存されませんでした:"
+  activerecord:
+      attributes:
+        customer:
+          email: "メールアドレス"
+          password: "パスワード"
+          display_name: "表示名"
+          password_confirmation: "パスワード(確認用)"
+      
