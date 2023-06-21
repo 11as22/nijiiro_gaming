@@ -13,7 +13,6 @@ class Customer < ApplicationRecord
   
   has_many :item_posts, dependent: :destroy
   has_many :reviews, dependent: :destroy
-  has_many :review_comments, dependent: :destroy
   has_many :item_favorites, dependent: :destroy
   
   # フォローをした、フォローをされたの関係

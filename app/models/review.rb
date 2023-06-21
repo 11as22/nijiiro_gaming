@@ -9,5 +9,4 @@ class Review < ApplicationRecord
   
   belongs_to :customer
   belongs_to :item_post
-  has_many :review_comments, dependent: :destroy
 end
