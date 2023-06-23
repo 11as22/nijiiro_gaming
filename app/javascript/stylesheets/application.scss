@@ -1,6 +1,10 @@
 @use '~bootstrap/scss/bootstrap';
 @use '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+.profile_small_image{
+  width: 90px;
+  height: 90px;
+}
 .large-image{
   width: 250px;
   height: 200px;

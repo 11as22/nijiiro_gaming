@@ -35,7 +35,7 @@
 </div>  
 
 <div class = "container">
-  <%= form_with url: admin_item_post_review_path(@item_post.id, @review.id), method: :patch, local: true do |f| %>
+  <%= form_with model: [@item_post, @review], url: admin_item_post_review_path, method: :patch, local: true do |f| %>
     <div class ="row mt-4">
       <p class="ml-3">評価</p>
       <!--raty使用-->
