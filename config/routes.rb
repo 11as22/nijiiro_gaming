@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
- 
+
 devise_for :customers, skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
@@ -20,7 +20,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :item_posts, only:[:index, :show ,:edit, :update, :destroy] do
       resources :reviews, only:[:show, :edit, :update, :destroy]
     end
-    
+
      get 'customer/:customer_id/reviews' => 'customers#reviews'
     resources :customers, only:[:index, :show, :edit, :update] do
       member do
@@ -30,7 +30,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
       get 'followers' => 'relationships#followers', as: 'followers'
     end
     resources :item_genres, only:[:index, :edit, :create, :update]
-    
+
     # resources :review_comments, only:[:index, :destroy]
     root to: 'homes#top'
     get '/about' =>'homes#about'
@@ -54,7 +54,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
     end
-    
+
     # resources :review_comments, only:[:new, :create, :index, :destroy]
     root to: 'homes#top'
     get '/about' =>'homes#about'
