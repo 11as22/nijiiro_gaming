@@ -178,7 +178,7 @@ p '==================== review create ===================='
   )
   
   item_post1.reviews.create(
-    customer_id: 1,
+    customer_id: 2,
     title: "細い",
     item_price: "セール時19800円（税込)",
     impression: "被せ持ちだが、サイドが細すぎて微妙、軽いのと応答速度が良いのは良かった。",
@@ -202,7 +202,7 @@ p '==================== review create ===================='
   )
   
    item_post11.reviews.create(
-    customer_id: 2,
+    customer_id: 3,
     title: "最強",
     item_price: "25000円(本体のみ)",
     impression: "めちゃ反応はやい最強",
