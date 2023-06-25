@@ -45,7 +45,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     end
 
     get '/customer/:customer_id/reviews' => 'customers#reviews'
-
+    get 'customers' => redirect("/customers/sign_up")
     resources :customers, only:[:show, :edit, :update] do
       member do
         get :favorites
