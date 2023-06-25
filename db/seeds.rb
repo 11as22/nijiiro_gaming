@@ -26,23 +26,26 @@ p '==================== item_genre create ===================='
 
 p '==================== customer create ===================='
 
-Customer.create(
+customer1 = Customer.new(
   display_name: "customer1",
   email: "customer1@example.com",
   password: '111111',
 )
+customer1.save!
 
-Customer.create(
+customer2 = Customer.new(
   display_name: "customer2",
   email: "customer2@example.com",
   password: '222222',
 )
+customer2.save!
 
-Customer.create(
+customer3 = Customer.new(
   display_name: "customer3",
   email: "customer3@example.com",
   password: '333333',
 )
+customer3.save!
 
 p '==================== item_post create ===================='
   item_post1 = ItemPost.new(
@@ -54,7 +57,7 @@ p '==================== item_post create ===================='
     )
     item_post1.item_image.attach(io: File.open(Rails.root.join('app/assets/images/Viper_V2_Pro.jpg')), filename: 'Viper_V2_Pro.jpg')
     item_post1.save!
-  
+
   item_post2 = ItemPost.new(
     item_genre_id: 3,
     customer_id: 1,
@@ -64,8 +67,8 @@ p '==================== item_post create ===================='
     )
     item_post2.item_image.attach(io: File.open(Rails.root.join('app/assets/images/Aqua_Contro_Plus_Wave Storm.jpg')), filename: 'Aqua_Contro_Plus_Wave Storm.jpg')
     item_post2.save!
-  
-  
+
+
   item_post3 = ItemPost.new(
     item_genre_id: 3,
     customer_id: 2,
@@ -76,7 +79,7 @@ p '==================== item_post create ===================='
     )
     item_post3.item_image.attach(io: File.open(Rails.root.join('app/assets/images/Aqua_Control_Plus_ROB_Strata.jpg')), filename: 'Aqua_Control_Plus_ROB_Strata.jpg')
     item_post3.save!
-  
+
   item_post4 = ItemPost.new(
     item_genre_id: 3,
     customer_id: 2,
@@ -86,7 +89,7 @@ p '==================== item_post create ===================='
     )
     item_post4.item_image.attach(io: File.open(Rails.root.join('app/assets/images/FnaticDash.jpg')), filename: 'FnaticDash.jpg')
     item_post4.save!
-  
+
   item_post5 = ItemPost.new(
     item_genre_id: 3,
     customer_id: 2,
@@ -96,7 +99,7 @@ p '==================== item_post create ===================='
     )
     item_post5.item_image.attach(io: File.open(Rails.root.join('app/assets/images/G-SR-SE_ROUGE.jpg')), filename: 'G-SR-SE_ROUGE.jpg')
     item_post5.save!
-  
+
   item_post6 = ItemPost.new(
     item_genre_id: 1,
     customer_id: 3,
@@ -106,7 +109,7 @@ p '==================== item_post create ===================='
     )
     item_post6.item_image.attach(io: File.open(Rails.root.join('app/assets/images/FinalMouse_Tenz_s.jpg')), filename: 'FinalMouse_Tenz_s.jpg')
     item_post6.save!
-  
+
   item_post7 = ItemPost.new(
     item_genre_id: 1,
     customer_id: 3,
@@ -116,7 +119,7 @@ p '==================== item_post create ===================='
     )
     item_post7.item_image.attach(io: File.open(Rails.root.join('app/assets/images/HSK_Pro_4K_Wireless Mouse.jpg')), filename: 'HSK_Pro_4K_Wireless Mouse.jpg')
     item_post7.save!
-  
+
   item_post8 = ItemPost.new(
     item_genre_id: 3,
     customer_id: 3,
@@ -126,7 +129,7 @@ p '==================== item_post create ===================='
     )
     item_post8.item_image.attach(io: File.open(Rails.root.join('app/assets/images/SkyPad_3.0XL.jpg')), filename: 'SkyPad_3.0XL.jpg')
     item_post8.save!
-  
+
   item_post9 = ItemPost.new(
     item_genre_id: 2,
     customer_id: 3,
@@ -136,7 +139,7 @@ p '==================== item_post create ===================='
     )
     item_post9.item_image.attach(io: File.open(Rails.root.join('app/assets/images/G913.jpg')), filename: 'G913.jpg')
     item_post9.save!
-    
+
   item_post10 = ItemPost.new(
     item_genre_id: 2,
     customer_id: 3,
@@ -146,7 +149,7 @@ p '==================== item_post create ===================='
     )
     item_post10.item_image.attach(io: File.open(Rails.root.join('app/assets/images/Varmilo73_Sakura_JIS_Keyboard.jpg')), filename: 'Varmilo73_Sakura_JIS_Keyboard.jpg')
     item_post10.save!
-  
+
   item_post11 = ItemPost.new(
     item_genre_id: 2,
     customer_id: 3,
@@ -156,8 +159,8 @@ p '==================== item_post create ===================='
     )
     item_post11.item_image.attach(io: File.open(Rails.root.join('app/assets/images/Wooting_two_HE.jpg')), filename: 'Wooting_two_HE.jpg')
     item_post11.save!
-    
-    
+
+
   item_post12 = ItemPost.new(
     item_genre_id: 2,
     customer_id: 3,
@@ -176,7 +179,7 @@ p '==================== review create ===================='
     impression: "無線マウスの中では軽くて、つまみ持ちにちょうど良いので僕には会いました",
     star: 4.5
   )
-  
+
   item_post1.reviews.create(
     customer_id: 2,
     title: "細い",
@@ -184,7 +187,7 @@ p '==================== review create ===================='
     impression: "被せ持ちだが、サイドが細すぎて微妙、軽いのと応答速度が良いのは良かった。",
     star: 3
   )
-  
+
   item_post6.reviews.create(
     customer_id: 2,
     title: "脅威の42グラム",
@@ -192,7 +195,7 @@ p '==================== review create ===================='
     impression: "size Sを購入。横幅が細いので、つまみ持ちであればすごく良い。被せ持ち、つかみ持ちは持ちづらいかもしれない。size Sは45gとすごく軽い。５点と言いたいが個体により当たり外れが大きいので星４",
     star: 4
   )
-  
+
   item_post5.reviews.create(
     customer_id: 2,
     title: "G-SR-SEの上位互換",
@@ -200,7 +203,7 @@ p '==================== review create ===================='
     impression: "前作のG-SE-SRより耐久性と耐湿性が上がり、前よりも表面が滑りやすくとてもよいです。だが、他のマウスパッドに比べ耐久性と耐湿性は劣ります。正規価格で買えれば安いのでぜひ正規価格で販売していたら購入してみてください",
     star: 4.5
   )
-  
+
    item_post11.reviews.create(
     customer_id: 3,
     title: "最強",
@@ -208,3 +211,49 @@ p '==================== review create ===================='
     impression: "めちゃ反応はやい最強",
     star: 5
   )
+
+  p '==================== followers create ==================='
+
+  customer1.followers << customer2
+  customer1.followers << customer3
+  customer1.save!
+
+  customer2.followers << customer1
+  customer2.followers << customer3
+  customer2.save!
+
+  customer3.followers << customer2
+  customer3.followers << customer1
+  customer3.save!
+  
+p '==================== item_favorite create ==================='  
+  ItemFavorite.create(
+    customer_id: 1,
+    item_post_id: 1,
+  )
+  
+  ItemFavorite.create(
+    customer_id: 1,
+    item_post_id: 2,
+  )
+  
+  ItemFavorite.create(
+    customer_id: 1,
+    item_post_id: 3,
+  )
+  
+  ItemFavorite.create(
+    customer_id: 2,
+    item_post_id: 5,
+  )
+  
+  ItemFavorite.create(
+    customer_id: 2,
+    item_post_id: 1,
+  )
+  
+  ItemFavorite.create(
+    customer_id: 2,
+    item_post_id: 3,
+  )
+
