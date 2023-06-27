@@ -2,7 +2,7 @@ class Public::CustomersController < ApplicationController
    # ログインしていないユーザーの許されるアクション
   before_action :authenticate_customer!
    # 他のカスタマーが自分に対して行えないアクション
-  before_action :correct_customer, only: [:edit, :update, :destroy, :favorites]
+  before_action :correct_customer, only: [:edit, :update, :favorites]
   def show
     @customer = Customer.find(params[:id])
   end
@@ -13,13 +13,17 @@ class Public::CustomersController < ApplicationController
   
   def update
     @customer = Customer.find(params[:id])
-    if @customer.update(customer_params)
-      redirect_to customer_path(@customer)
-      flash[:notice] = "会員情報の更新に成功しました"
+    if @customer.email == 'guest@example.com'
+      flash[:notice] = "ゲストは編集できません。"
+      redirect_to root_path
     else
-      @customer = Customer.find(params[:id])
-      flash[:alert] = "会員情報の更新に失敗しました。"
-      render :edit
+      if @customer.update(customer_params)
+        redirect_to customer_path(@customer)
+        flash[:notice] = "会員情報の更新に成功しました"
+      else
+        flash[:alert] = "会員情報の更新に失敗しました。"
+        render :edit
+      end
     end
   end
 
