@@ -13,6 +13,7 @@ class Admin::ReviewsController < Admin::ApplicationController
   def update
     @item_post = ItemPost.find(params[:item_post_id])
     @review = Review.find(params[:id])
+    @review.lang_score = Language.get_data(review_params[:impression])
     if @review.update(review_params)
       flash[:notice] = "レビューの更新に成功しました"
       redirect_to admin_item_post_review_path(@item_post.id, @review.id)
@@ -34,6 +35,6 @@ class Admin::ReviewsController < Admin::ApplicationController
   private
 
   def review_params
-   params.require(:review).permit(:customer_id, :item_post_id, :title, :impression, :item_price, :star)
+   params.require(:review).permit(:customer_id, :item_post_id, :title, :impression, :item_price, :star, :lang_score)
   end
 end

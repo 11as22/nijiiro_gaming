@@ -10,10 +10,11 @@ class ItemPost < ApplicationRecord
 
   has_one_attached :item_image
   # ------ソートの記述---------
-  #レビューの平均評価値が高い順
-  # SQLから取り出し
+  #レビューの平均評価値が高い順,SQLから取り出し
   scope :review_rate, -> { left_joins(:reviews).group(:id).order('AVG(reviews.star) DESC') }
-  # レビューの多い順
+  #AI感情分析のスコアの高い順
+  #scope :lang_score_rate, ->
+  # レビュー件数の多い順
   scope :review_count, -> { includes(:reviews).sort {|a,b| b.reviews.count <=> a.reviews.count }}
   # ----------------------------
 

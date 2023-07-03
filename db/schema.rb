@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 2023_06_04_094557) do
     t.text "impression", null: false
     t.string "item_price"
     t.float "star", default: 3.0, null: false
+    t.decimal "lang_score", precision: 5, scale: 3
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

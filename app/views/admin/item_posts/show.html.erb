@@ -58,6 +58,7 @@
                   });
       </script>
       <h4><%= @item_post.reviews.average(:star).to_f.round(1) %>点</h4>
+      <p class = "sentiment-score ml-4">AI感情分析平均 <%= render 'admin/item_posts/lang_score_average', item_post: @item_post %> </p>
       <p>(レビュー<%= @item_post.reviews.count %>件)</p>
     </div>
   <div class ="row justify-content-center">

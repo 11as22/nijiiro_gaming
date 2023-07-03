@@ -56,6 +56,11 @@
                 <!--表示する本文を10文字に設定-->
                 <td><%= review.impression.truncate(10) %></td>
               </tr>
+              <tr>
+                <td>Ai感情分析</td>
+                <td colspan = "3"></td>
+                <td class = "sentiment-score"><%= render 'admin/reviews/lang_score', review: review %> </td>
+              </tr>
             </th>
           </table>
         </div>

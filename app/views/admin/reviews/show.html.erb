@@ -84,6 +84,13 @@
             <td class ="text-wrap" style="width: 30rem;"><%= @review.impression %></td>
           </tr>
           <tr>
+            <td>AI感情分析</td>
+            <td colspan = "3"></td>
+            <td class="sentiment-score">
+              <%= render 'admin/reviews/lang_score', review: @review %>
+            </td>
+          </tr>
+          <tr>
             <td>
               <%= link_to "編集する", edit_admin_item_post_review_path(@item_post.id, @review.id), class: "btn btn-success" %>
             </td>

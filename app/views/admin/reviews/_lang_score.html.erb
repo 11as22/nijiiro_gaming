@@ -1,0 +1,12 @@
+<% if review.lang_score >= 0.7 %>
+    凄く良い! 😇
+  <% elsif review.lang_score >= 0.2 %>
+    良い 😀
+  <% elsif review.lang_score <= 0.1 && review.lang_score >= -0.1 %>
+    普通 😕
+  <% elsif review.lang_score <= -0.2 && review.lang_score >= -0.6 %>
+    悪い 😡
+  <% else %>
+    凄く悪い! 🥶
+<% end %>
+[<%= review.lang_score %>]点
