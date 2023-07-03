@@ -7,6 +7,7 @@ class CreateReviews < ActiveRecord::Migration[6.1]
       t.text :impression, null: false
       t.string :item_price
       t.float :star, null: false, default: 3
+      t.decimal :lang_score, precision: 5, scale: 3
       t.timestamps
     end
   end

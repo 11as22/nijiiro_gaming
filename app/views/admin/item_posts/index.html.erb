@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class ="row offset-md-7">
-        <%= link_to 'レビューの多い順の高い順', admin_item_posts_path(review_count: "true") %>|<%= link_to '平均評価の高い順', admin_item_posts_path(review_rate: "true") %>
+        <%= link_to 'レビュー件数の多い順', admin_item_posts_path(review_count: "true") %>|<%= link_to '平均評価の高い順', admin_item_posts_path(review_rate: "true") %>
       </div>
       <%= render 'admin/item_posts/item_post_index', item_posts: @item_posts %>
     </div>

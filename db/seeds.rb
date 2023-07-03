@@ -172,43 +172,53 @@ p '==================== item_post create ===================='
     item_post12.save!
 
 p '==================== review create ===================='
+  lang_score1 = Language.get_data("無線マウスの中では軽くて、つまみ持ちにちょうど良いので僕には合いました")
   item_post1.reviews.create(
     customer_id: 1,
     title: "無線マウス最強",
     item_price: "21780円（税込)",
-    impression: "無線マウスの中では軽くて、つまみ持ちにちょうど良いので僕には会いました",
+    impression: "無線マウスの中では軽くて、つまみ持ちにちょうど良いので僕には合いました",
+    lang_score: lang_score1,
     star: 4.5
   )
-
+  
+  lang_score2 = Language.get_data("被せ持ちだが、サイドが細すぎて微妙、軽いのと応答速度が良いのは良かった。")
   item_post1.reviews.create(
     customer_id: 2,
     title: "細い",
     item_price: "セール時19800円（税込)",
     impression: "被せ持ちだが、サイドが細すぎて微妙、軽いのと応答速度が良いのは良かった。",
+    lang_score: lang_score2,
     star: 3
   )
-
+  
+  lang_score3 = Language.get_data("size Sを購入。横幅が細いので、つまみ持ちであればすごく良い。被せ持ち、つかみ持ちは持ちづらいかもしれない。size Sは45gとすごく軽い。５点と言いたいが個体により当たり外れが大きいので星４")
   item_post6.reviews.create(
     customer_id: 2,
     title: "脅威の42グラム",
     item_price: "たぶん30000円",
     impression: "size Sを購入。横幅が細いので、つまみ持ちであればすごく良い。被せ持ち、つかみ持ちは持ちづらいかもしれない。size Sは45gとすごく軽い。５点と言いたいが個体により当たり外れが大きいので星４",
+    lang_score: lang_score3,
     star: 4
   )
-
+  
+  lang_score4 = Language.get_data("前作のG-SE-SRより耐久性と耐湿性が上がり、前よりも表面が滑りやすくとてもよいです。だが、他のマウスパッドに比べ耐久性と耐湿性は劣ります。正規価格で買えれば安いのでぜひ正規価格で販売していたら購入してみてください")
   item_post5.reviews.create(
     customer_id: 2,
     title: "G-SR-SEの上位互換",
     item_price: "5000円",
     impression: "前作のG-SE-SRより耐久性と耐湿性が上がり、前よりも表面が滑りやすくとてもよいです。だが、他のマウスパッドに比べ耐久性と耐湿性は劣ります。正規価格で買えれば安いのでぜひ正規価格で販売していたら購入してみてください",
+    lang_score: lang_score4,
     star: 4.5
   )
-
-   item_post11.reviews.create(
+    
+  lang_score5 = Language.get_data("めちゃ反応はやい最強")  
+  item_post11.reviews.create(
     customer_id: 3,
     title: "最強",
     item_price: "25000円(本体のみ)",
     impression: "めちゃ反応はやい最強",
+    lang_score: lang_score5,
     star: 5
   )
 

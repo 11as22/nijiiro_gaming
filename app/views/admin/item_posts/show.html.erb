@@ -37,8 +37,8 @@
     </div>
   </div>
   <!--商品に対しての平均点表示-->
-  <div class ="row justify-content-center border border-danger mt-3">
-    <h4 class ="mr-2">平均評価</h4>
+  <div class = "row justify-content-center border border-danger mt-3">
+    <h4 class = "offset-md-2 mr-2">平均評価</h4>
     <div id = "average_star_<%= @item_post.id %>"></div>
     <script>
      $(document).on('turbolinks:load', function() {
@@ -58,6 +58,7 @@
                   });
       </script>
       <h4><%= @item_post.reviews.average(:star).to_f.round(1) %>点</h4>
+      <p class = "sentiment-score ml-4">AI感情分析平均 <%= render 'admin/item_posts/lang_score_average', item_post: @item_post %> </p>
       <p>(レビュー<%= @item_post.reviews.count %>件)</p>
     </div>
   <div class ="row justify-content-center">

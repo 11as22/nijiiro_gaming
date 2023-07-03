@@ -10,7 +10,8 @@ module NijiiroGaming
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
-    
+    # libファイルを読み込む
+    config.paths.add 'lib', eager_load: true
     #ステータスの日本語化
     config.i18n.default_locale = :ja
 

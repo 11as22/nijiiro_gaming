@@ -1,7 +1,7 @@
 class Public::ReviewsController < ApplicationController
   # ログインしていないユーザーの許されるアクション
-  before_action :authenticate_customer!, except: [:index, :show]
-  #他のカスマター自分に対して行えないアクション
+  before_action :authenticate_customer!, except: [:show]
+  #ログインユーザー本人が行えるアクション
   before_action :correct_customer, only: [:edit, :update, :destroy]
   def new
     @item_post = ItemPost.find(params[:item_post_id])
@@ -11,6 +11,7 @@ class Public::ReviewsController < ApplicationController
   def create
     @item_post = ItemPost.find(params[:item_post_id])
     @review = Review.new(review_params)
+    @review.lang_score = Language.get_data(review_params[:impression])
     @review.item_post_id  = @item_post.id
     @review.customer_id = current_customer.id
     if @review.save
@@ -26,9 +27,6 @@ class Public::ReviewsController < ApplicationController
     end
   end
 
-  def index
-  end
-
   def show
     @item_post = ItemPost.find(params[:item_post_id])
     @review = Review.find(params[:id])
@@ -42,6 +40,7 @@ class Public::ReviewsController < ApplicationController
   def update
     @item_post = ItemPost.find(params[:item_post_id])
     @review = Review.find(params[:id])
+    @review.lang_score = Language.get_data(review_params[:impression]) 
     if @review.update(review_params)
       flash[:notice] = "レビューの更新に成功しました"
       redirect_to item_post_review_path(@item_post.id, @review.id)
@@ -71,6 +70,6 @@ class Public::ReviewsController < ApplicationController
   end
 
   def review_params
-   params.require(:review).permit(:customer_id, :item_post_id, :title, :impression, :item_price, :star)
+   params.require(:review).permit(:customer_id, :item_post_id, :title, :impression, :item_price, :star, :lang_score)
   end
 end
