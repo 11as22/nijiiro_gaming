@@ -5,6 +5,7 @@
   width: 90px;
   height: 90px;
 }
+
 .large-image{
   width: 250px;
   height: 200px;
@@ -52,12 +53,12 @@
   font-weight: bold;
   font-size: 100%;
   display: inline-block;
-  animation: 5s title_logo linear infinite;
+  animation:  5s title_logo linear infinite;
   margin-left: 13%;
 }
 
 @keyframes title_logo{
-    100% { background-position: 200%; }
+  100% { background-position: 200%; }
 }
 
 .footer_text {
@@ -93,4 +94,122 @@ div[class^="item_post_genre_"]{
 
 .translation_missing, .page{
   padding: 0px 10px;
+}
+
+.back-div {
+  background: linear-gradient(-45deg, #8cdaff, #b6faff, #c9ffed, #e1ffe9);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.preview {
+  width: 150px;
+  height: 100px;
+  object-fit: contain;
+}
+
+// ----文字がはねるアニメーション 記述開始----
+.jump{
+  animation: jump 1s linear infinite;
+}
+
+@keyframes jump{
+   0%   { transform: scale(1.0, 1.0) translate(0%, 0%); }
+  10%  { transform: scale(1.1, 0.9) translate(0%, 5%); }
+  40%  { transform: scale(1.2, 0.8) translate(0%, 15%); }
+  50%  { transform: scale(1.0, 1.0) translate(0%, 0%); }
+  60%  { transform: scale(0.9, 1.2) translate(0%, -50%); }
+  75%  { transform: scale(0.9, 1.2) translate(0%, -20%); }
+  85%  { transform: scale(1.2, 0.8) translate(0%, 15%); }
+  100% { transform: scale(1.0, 1.0) translate(0%, 0%); }
+}
+// ----文字がはねるアニメーション　記述終了----
+
+// ----文字が一つづつ飛び跳ねるアニメーション（カスタマーネーム)　記述開始----
+/*** 全文字にアニメーションを適用 ***/
+.name-wave-parent span, strong{
+  display: inline-block; /*横並びにしつつアニメーションを適用*/
+  animation: 1s name-wave-parent ease-in infinite alternate;
+}
+
+@keyframes name-wave-parent{
+  0%{transform: translateY(0);}
+  100%{transform: translateY(12px);}
+}
+
+/*** 各文字のスタート時間をずらす ***/
+/* 1文字目 */
+.name-wave-parent span:nth-child(1){
+  animation-delay: 0;
+}
+/* 2文字目 */
+.name-wave-parent span:nth-child(2){
+  animation-delay: 0.2s;
+}
+/* 3文字目 */
+.name-wave-parent span:nth-child(3){
+  animation-delay: 0.4s;
+}
+/* 4文字目 */
+.name-wave-parent span:nth-child(4){
+  animation-delay: 0.6s;
+}
+/* 5文字目 */
+.name-wave-parent span:nth-child(5){
+  animation-delay: 0.8s;
+}
+/* 6文字目 */
+.name-wave-parent span:nth-child(6){
+  animation-delay: 1s;
+}
+/* 7文字目 */
+.name-wave-parent > strong{
+  animation-delay: 1.2s;
+}
+/* 8文字目 */
+.name-wave-parent span:nth-child(7){
+  animation-delay: 1.4s;
+}
+/* 9文字目 */
+.name-wave-parent span:nth-child(8){
+  animation-delay: 1.6s;
+}
+/* 10文字目 */
+.name-wave-parent span:nth-child(9){
+  animation-delay: 1.8s;
+}
+
+.typewriter{
+  margin: auto;
+  width: 0;
+  border-right: 0.05em solid black; /*カーソル用の線*/
+  overflow: hidden; /*はみ出た要素を非表示に*/
+  white-space: nowrap; /*1行に*/
+  animation: typing 3s steps(5, end) forwards, cursol 1s step-end infinite;
+/*animation: アニメーション名｜時間｜分割数｜ループ */
+}
+/*** 1文字ずつ出現するアニメーション ***/
+@keyframes typing{
+  0% { width: 0%; }
+  100% { width: 3em; }
+}
+
+/*** カーソルが点滅するアニメーション ***/
+@keyframes cursol{
+  0%{ border-color: transparent; }/*消滅*/
+  50%{ border-color: black; } /*出現*/
+  100%{ border-color: transparent; }/*消滅*/
 }
