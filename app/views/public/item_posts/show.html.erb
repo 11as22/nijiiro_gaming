@@ -57,27 +57,26 @@
     <h4 class ="offset-md-2 mr-2">平均評価</h4>
     <div id = "average_star_<%= @item_post.id %>"></div>
     <script>
-     $(document).on('turbolinks:load', function() {
-                    let elem = document.querySelector('#average_star_<%= @item_post.id %>');
-                    if (elem == null) return;
-
-                    elem.innerHTML = "";
-                    let opt = {
-                      starOn: "<%= asset_path('star-on.png') %>",
-                      starOff: "<%= asset_path('star-off.png') %>",
-                      starHalf: "<%= asset_path('star-half.png') %>",
-                      half: true,
-                      readOnly: true,
-                      score: <%= @item_post.reviews.average(:star).to_f.round(1) %>,
-                    };
-                    raty(elem, opt);
-                  });
-      </script>
+      $(document).ready(function() {
+        let elem = document.querySelector('#average_star_<%= @item_post.id %>');
+        if (elem == null) return;
+  
+        elem.innerHTML = "";
+        let opt = {
+          starOn: "<%= asset_path('star-on.png') %>",
+          starOff: "<%= asset_path('star-off.png') %>",
+          starHalf: "<%= asset_path('star-half.png') %>",
+          half: true,
+          readOnly: true,
+          score: <%= @item_post.reviews.average(:star).to_f.round(1) %>,
+        };
+        raty(elem, opt);
+      });
+    </script>
     <h4><%= @item_post.reviews.average(:star).to_f.round(1) %>点</h4>
     <p class = "sentiment-score ml-4">AI感情分析平均 <%= render 'public/item_posts/lang_score_average', item_post: @item_post %> </p>
     <p>(レビュー<%= @item_post.reviews.count %>件)</p>
   </div>
-    
   <div class ="row justify-content-center">
     <div class ="col-3 text-center mt-2">
       <%= link_to "この商品のレビューを書く", new_item_post_review_path(@item_post), class: "btn-block btn-primary"%>
