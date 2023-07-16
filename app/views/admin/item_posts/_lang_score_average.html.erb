@@ -1,12 +1,12 @@
 <% if item_post.reviews.average(:lang_score).to_f.round(1) >= 0.7 %>
-    凄く良い! 😇
-  <% elsif item_post.reviews.average(:lang_score).to_f.round(1) >= 0.2 %>
-    良い 😀
-  <% elsif item_post.reviews.average(:lang_score).to_f.round(1) <= 0.1 && item_post.reviews.average(:lang_score).to_f.round(1) >= -0.1 %>
-    普通 😕
-  <% elsif item_post.reviews.average(:lang_score).to_f.round(1) <= -0.2 && item_post.reviews.average(:lang_score).to_f.round(1) >= -0.6 %>
-    悪い 😡
+    凄く良い! <span class = "engel">😇</span>
+  <% elsif item_post.reviews.average(:lang_score).to_f.round(1) >= 0.1 %>
+    良い <span class = "chewy">😀</span>
+  <% elsif item_post.reviews.average(:lang_score).to_f.round(1) < 0.1 && item_post.reviews.average(:lang_score).to_f.round(1) > -0.1 %>
+    普通 <span class = "wave">😕</span>
+  <% elsif item_post.reviews.average(:lang_score).to_f.round(1) < -0.2 && item_post.reviews.average(:lang_score).to_f.round(1) >= -0.6 %>
+    悪い <span class = "zoom_shrink">😡</span>
   <% else %>
-    凄く悪い! 🥶
+    凄く悪い! <span class = "shake">🥶</span>
 <% end %>
 [<%= item_post.reviews.average(:lang_score).to_f.round(1) %>]点

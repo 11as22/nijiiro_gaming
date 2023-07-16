@@ -25,21 +25,21 @@
                 <td class ="col-md-3">
                   <div id = "average_star_<%= item_post.id %>"></div>
                     <script>
-                       $(document).on('turbolinks:load', function() {
-                          let elem = document.querySelector('#average_star_<%= item_post.id %>');
-                          if (elem == null) return;
+                      $(document).ready(function() {
+                        let elem = document.querySelector('#average_star_<%= item_post.id %>');
+                        if (elem == null) return;
 
-                          elem.innerHTML = "";
-                          let opt = {
-                            starOn: "<%= asset_path('star-on.png') %>",
-                            starOff: "<%= asset_path('star-off.png') %>",
-                            starHalf: "<%= asset_path('star-half.png') %>",
-                            half: true,
-                            readOnly: true,
-                            score: <%= item_post.reviews.average(:star).to_f.round(1) %>,
-                          };
-                          raty(elem, opt);
-                        });
+                        elem.innerHTML = "";
+                        let opt = {
+                          starOn: "<%= asset_path('star-on.png') %>",
+                          starOff: "<%= asset_path('star-off.png') %>",
+                          starHalf: "<%= asset_path('star-half.png') %>",
+                          half: true,
+                          readOnly: true,
+                          score: <%= item_post.reviews.average(:star).to_f.round(1) %>,
+                        };
+                        raty(elem, opt);
+                      });
                     </script>
                 </td>
                 <td class ="col-md-3"><small><%= item_post.reviews.average(:star).to_f.round(1) %>点(レビュー<%= item_post.reviews.count %>件)</small></td>
