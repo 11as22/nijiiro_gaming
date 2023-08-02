@@ -4,20 +4,8 @@
     <div class = "row">
       <div class = "col-md-4 mt-4 ">
         <%= image_tag  @item_post.get_item_image(250, 200), class: "large-image" %>
-        <div class ="row ml-3">
-          <% if customer_signed_in? %>
-            <% if @item_post.favorited?(current_customer) %>
-              <!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
-              <%= link_to  item_post_item_favorites_path(@item_post.id), method: :delete, class: "btn btn-danger" do %>
-                <span>いいねを外す<i class="fas fa-heart fa-spin" style="color: #ff0000;"></i>︎</span>
-              <% end %>
-            <% else %>
-             <!--一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
-              <%= link_to item_post_item_favorites_path(@item_post.id), method: :post, class: "btn-outline-danger" do %>
-                <span>いいねをする<i class="far fa-heart fa-spin" style="color: #ff0000;"></i>︎</span>
-              <% end %>
-            <% end %>
-          <% end %>
+        <div id = "favorite_btn_<%= @item_post.id %>" class = "row ml-3">
+          <%= render 'public/item_favorites/favorite_btn', item_post: @item_post %>
         </div>
       </div>
       <div class ="col-md-8">

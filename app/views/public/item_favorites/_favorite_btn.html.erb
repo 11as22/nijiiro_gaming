@@ -1,0 +1,13 @@
+<% if customer_signed_in? %>
+  <% if item_post.favorited?(current_customer) %>
+    <!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
+    <%= link_to  item_post_item_favorites_path(item_post.id), method: :delete, remote: true, class: "btn btn-danger" do %>
+      <span>いいねを外す<i class="fas fa-heart fa-spin" style="color: #ff0000;"></i>︎</span>
+    <% end %>
+  <% else %>
+   <!--一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
+    <%= link_to item_post_item_favorites_path(item_post.id), method: :post, remote: true, class: "btn btn-outline-danger" do %>
+      <span>いいねをする<i class="far fa-heart fa-spin" style="color: #ff0000;"></i>︎</span>
+    <% end %>
+  <% end %>
+<% end %>
