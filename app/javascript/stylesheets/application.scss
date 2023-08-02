@@ -1,7 +1,7 @@
 @use '~bootstrap/scss/bootstrap';
 @use '~@fortawesome/fontawesome-free/scss/fontawesome';
 
-.profile_small_image{
+.profile-small-image{
   width: 90px;
   height: 90px;
 }
@@ -42,7 +42,7 @@
   100% { transform: scale(100%); }
 }
 
-.search_img{
+.search-img{
   width: 500px;
   height: 50px;
 }
@@ -63,29 +63,29 @@
   100% { background-color: Magenta; }
 }
 
-.title_logo{
+.title-logo{
   background: linear-gradient(to right,#e60000,#f39800,#fff100,#009944,#0068b7,#1d2088,#920783) 0 / 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bold;
   font-size: 100%;
   display: inline-block;
-  animation: 5s title_logo linear infinite;
+  animation: 5s title-logo linear infinite;
   margin-left: 13%;
 }
 
-@keyframes title_logo{
+@keyframes title-logo{
   100% { background-position: 200%; }
 }
 
-.footer_text {
+.footer-text {
   /* アニメーションの長さ */
-  animation: footer_text 2s linear infinite;
+  animation: footer-text 2s linear infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-@keyframes footer_text {
+@keyframes footer-text {
   /* 色の指定 */
   0% { background-color: Magenta; }
   33% { background-color: yellow; }
@@ -93,12 +93,12 @@
   100% { background-color: Magenta; }
 }
 
-.item_post_box{
+.item-post-box{
   position: relative;
 }
 
-// 先頭にitem_post_genre_とつくクラス名を指定
-div[class^="item_post_genre_"]{
+// 先頭にitem-post-genre-とつくクラス名を指定
+div[class^="item-post-genre-"]{
   z-index: 1;
   position: absolute;
   top: 0px;
@@ -308,12 +308,12 @@ div[id^="average_star"] > img:nth-child(5){
   animation-delay: 0.8s;
 }
 
-.zoom_shrink{
+.zoom-shrink{
   display: inline-block;
-  animation: zoom_shrink 1s linear infinite;
+  animation: zoom-shrink 1s linear infinite;
 }
 
-@keyframes zoom_shrink {
+@keyframes zoom-shrink {
   0%   { transform: scale(100%); }
   10%  { transform: scale(110%); }
   25%  { transform: scale(125%); }
@@ -364,7 +364,7 @@ div[id^="average_star"] > img:nth-child(5){
   71% { transform: translateX(0) translateY(0) scale(1.0, 1.0); }
 }
 
-.btn:hover, .genre_name:hover {
+.btn:hover, .genre-name:hover {
    transform: scale(1.1);
    transition:1s all;
 }

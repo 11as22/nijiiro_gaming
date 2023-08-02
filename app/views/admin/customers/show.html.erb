@@ -5,10 +5,10 @@
       <h1><%= @customer.display_name %>さんのページ</h1>
       <%= image_tag @customer.get_profile_image(250,200), class: "large-image" %>
       <div>
-        <%= link_to admin_customer_followings_path(@customer), class: "btn btn-info" do %>
+        <%= link_to admin_customer_followings_path(@customer), class: "btn btn-info mt-2" do %>
           フォロー<%= @customer.followings.count %>人
         <% end %>
-        <%= link_to admin_customer_followers_path(@customer), class: "btn btn-info ml-5" do%>
+        <%= link_to admin_customer_followers_path(@customer), class: "btn btn-info ml-5 mt-2" do%>
           フォロワー<%= @customer.followers.count %>人
         <% end %>
       </div>

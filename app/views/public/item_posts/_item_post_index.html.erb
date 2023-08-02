@@ -3,9 +3,9 @@
 <% item_posts.each do |item_post| %>
   <!--ここでdivとその背景色を作成する。-->
   <%= content_tag :div, class: "col-md-12", style: "background-color: #{colors.sample}" do %>
-    <%= link_to item_post_path(item_post.id), class: "item_post_box text-decoration-none text-dark" do %>
+    <%= link_to item_post_path(item_post.id), class: "item-post-box text-decoration-none text-dark" do %>
       <div class = "row border border-success mt-2 mb-1">
-        <div class = "item_post_genre_<%= item_post.item_genre.id %>"><%= item_post.item_genre.genre %></div>
+        <div class = "item-post-genre-<%= item_post.item_genre.id %>"><%= item_post.item_genre.genre %></div>
         <div class ="col-md-4 d-flex align-items-center">
           <%= image_tag  item_post.get_item_image(150, 100), class: "small-image" %>
         </div>
