@@ -29,7 +29,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
     end
-    resources :item_genres, only:[:index, :edit, :create, :update]
+    resources :item_genres, only:[:index, :edit, :create, :update, :destroy]
 
     # resources :review_comments, only:[:index, :destroy]
     root to: 'homes#top'

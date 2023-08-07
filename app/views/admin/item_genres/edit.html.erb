@@ -21,5 +21,8 @@
       </div>
     </tr>
   </table>
+  <div>
+    <%= link_to "ジャンルを削除する", admin_item_genre_path(@genres), data: {confirm: "ジャンルの削除を行うと、ジャンルに紐付いた全ての商品投稿、レビューが全て削除されます。よろしいですか？"}, method: :delete, class: "btn btn-danger" %>
+  </div>
   <% end %>
 </div>
