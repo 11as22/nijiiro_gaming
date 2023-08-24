@@ -1,6 +1,9 @@
 @use '~bootstrap/scss/bootstrap';
 @use '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+@media screen and (max-width:1024px){
+  
+}
 @media screen and (max-width:544px) {
   .gaming > img{
     width: 75px;
@@ -12,6 +15,8 @@
     font-size: 1.5rem;
   }
 }
+
+
 
 .profile-small-image{
   width: 90px;
