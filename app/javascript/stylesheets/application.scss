@@ -1,23 +1,6 @@
 @use '~bootstrap/scss/bootstrap';
 @use '~@fortawesome/fontawesome-free/scss/fontawesome';
 
-@media screen and (max-width:1024px){
-  
-}
-@media screen and (max-width:544px) {
-  .gaming > img{
-    width: 75px;
-    height: 75px;
-  }
-  
-  .title{
-    margin-left: 10%;
-    font-size: 1.5rem;
-  }
-}
-
-
-
 .profile-small-image{
   width: 90px;
   height: 90px;
@@ -43,8 +26,6 @@
 }
 
 .card-img{
-  width: 800px;
-  height: 507px;
   animation: zoom-top 1.5s linear infinite;
 }
 
@@ -384,5 +365,47 @@ div[id^="average_star"] > img:nth-child(5){
 .btn:hover, .genre-name:hover {
    transform: scale(1.1);
    transition:1s all;
+}
+
+@media screen and (max-width:1200px){
+  .gaming > img{
+    width: 110px;
+    height: 110px;
+  }
+  
+  .stroke {
+    font-size: 1.7rem;
+  }
+  
+  .top-counter {
+    font-size: 1.3rem;
+  }
+  
+  .top-card{
+    margin-top: 12%;
+  }
+  
+}
+
+@media screen and (max-width:576px) {
+  .gaming > img{
+    width: 75px;
+    height: 75px;
+  }
+  
+  .title{
+    margin-left: 10%;
+    font-size: 1.5rem;
+  }
+  
+  .stroke {
+    font-size: 1.5rem;
+  }
+  
+  .top-counter {
+    font-size: 1rem;
+  }
+  
+
 }
 
